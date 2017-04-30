@@ -1,0 +1,14 @@
+.root{
+    -fx-background-color: #515454;
+}
+Circle{
+    -fx-fill: #7e7e7e;
+}
+.pickyourparty{
+    -fx-text-align: center;
+    -fx-font: Century Gothic;
+    -fx-font-size: 53px;
+}
+.bcom{
+    -fx-color: #4e0a16;
+}
