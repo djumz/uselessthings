@@ -5,10 +5,11 @@ Circle{
     -fx-fill: #7e7e7e;
 }
 .pickyourparty{
-    -fx-text-align: center;
-    -fx-font: Century Gothic;
-    -fx-font-size: 53px;
+    -fx-alignment: center;
+}
+.hb1{
+    -fx-alignment: center;
 }
 .bcom{
-    -fx-color: #4e0a16;
+    -fx-background-color: linear-gradient(#dc9556, #ab4642);
 }
