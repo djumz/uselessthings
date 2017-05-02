@@ -30,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -37,6 +38,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 import jdk.nashorn.internal.runtime.JSType;
 
 /**
@@ -86,15 +88,15 @@ public class Polgame extends Application {
         Circle s17 = new Circle(412, 261, 8);
         Circle s18 = new Circle(415, 282, 8);
         Circle[] prvired = new Circle[18];
-        prvired[0 ] = s1;
-        prvired[1 ] = s2;
-        prvired[2 ] = s3;
-        prvired[3 ] = s4;
-        prvired[4 ] = s5;
-        prvired[5 ] = s6;
-        prvired[6 ] = s7;
-        prvired[7 ] = s8;
-        prvired[8 ] = s9;
+        prvired[0] = s1;
+        prvired[1] = s2;
+        prvired[2] = s3;
+        prvired[3] = s4;
+        prvired[4] = s5;
+        prvired[5] = s6;
+        prvired[6] = s7;
+        prvired[7] = s8;
+        prvired[8] = s9;
         prvired[9] = s10;
         prvired[10] = s11;
         prvired[11] = s12;
@@ -517,20 +519,23 @@ public class Polgame extends Application {
                     Label PubN = new Label("");
             HBox policiesh2 = new HBox(20);
                 Button poll = new Button();
-                poll.setText("      Pollution      ");
+                poll.setText("        Pollution        ");
                 Button imm = new Button();
                 imm.setText("     Immigration     ");
                 Button pubed = new Button();
                 pubed.setText("  Public Education  ");
             HBox policiesh3 = new HBox(20);
+            policiesh3.alignmentProperty();
+                Pane stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable = new Pane();
+                stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable.setPrefSize(50, 1);
                 VBox policiesv6 = new VBox(20);
-                    Label Sufferage = new Label("Sufferage");
-                    Button suffb = new Button();
-                    suffb.setText("End The Republic");
+                    Label Sufferage = new Label("         Sufferage");
+                    Button suffb = new Button();                    /**Just for the record, css doesn't work. I'm not an idiot. I would have*/
+                    suffb.setText("End The Republic");              /**this easier and faster if I could.*/
                 VBox policiesv7 = new VBox(20);
-                    Label War = new Label("War Policy");
+                    Label War = new Label("        War Policy");
                     Button warb = new Button();
-                    warb.setText("Declare War");
+                    warb.setText("    Declare War    ");
 
                     policiesv.getChildren().addAll(policiesh1, policiesh2, policiesh3);
             policiesh1.getChildren().addAll(policiesv1, policiesv2, policiesv3, policiesv4, policiesv5);
@@ -542,19 +547,18 @@ public class Polgame extends Application {
             policiesh2.getChildren().addAll(poll, imm, pubed);
                 policiesv6.getChildren().addAll(Sufferage, suffb);
                 policiesv7.getChildren().addAll(War, warb);
-            policiesh3.getChildren().addAll(policiesv6, policiesv7);
+            policiesh3.getChildren().addAll(stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable, policiesv6, policiesv7);
             
         policiesv.setLayoutX(100);
         policiesv.setLayoutY(350);
                 
         AnchorPane ap = new AnchorPane();
-        
         ap.getChildren().add(policiesv);
                 party Communist = new party("CP", "Communism", 6, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
                 party Socialist = new party("SP", "Socialism", 2.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
                 party SocialDemocrat = new party("SDP", "Social Democracy", 34, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
                 party LiberalDemocrat = new party("LDP", "Liberalism", 5, "#eaf455", 3, 3, 3, 3, 3, true, true, true, true, true);                  //gsld.setFill(Paint.valueOf(LiberalDemocrat.getColour()));
-                party Conservative = new party("Tory", "Conservatism", 34, "#2b20f9", 3, 3, 2, 2, 2, false, true, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
+                party Conservative = new party("Tory", "Conservatism", 34, "#2b20f9", 2, 3, 2, 2, 2, false, true, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
                 party Reactionary = new party("UKIP", "Monarchism", 2.5, "#0E1A8A", 2, 3, 2, 2, 3, false, false, false, false, true);              // gsr.setFill(Paint.valueOf(Reactionary.getColour()));
                 party Fascist = new party("Fascist", "Fascism", 2, "#020209", 1, 4, 3, 3, 4, false, false, true, false, true);                      //gsf.setFill(Paint.valueOf(Fascist.getColour()));
                 party NationalSocialist = new party("NSP", "National Socialism", 8, "#8B4513", 1, 5, 4, 3, 5, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
@@ -615,15 +619,26 @@ public class Polgame extends Application {
                 int ars = 0;    as[5] = ars;
                 int afs = 0;    as[6] = afs;
                 int ans = 0;    as[7] = ans;
+                double seatsfilled = 0.0;
                 for (int p = 0; p<8; p++){
                     for (int i = 0; i<redredova.length; i++){
                         for (int j = 0; j<redredova[i].length; j++){
                             if (redredova[i][j].getFill().toString().equals(Paint.valueOf(partys[p].getColour()).toString())){
                                 as[p]++;
+                                seatsfilled++;
                             }
                         }
                     }
                 }
+                acs = as[0];
+                ass = as[1];
+                asds = as[2];
+                alds = as[3];
+                ats = as[4];
+                ars = as[5];
+                afs = as[6];
+                ans = as[7];
+                
             lmyseats.setText(as[Integer.valueOf(myparty.getText())] + " seats");
             lmyseats.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
             lmyseats.setLayoutX(20);
@@ -636,10 +651,30 @@ public class Polgame extends Application {
             lmyideol.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
             lmyideol.setLayoutX(20);
             lmyideol.setLayoutY(130);
-            int s = acs+ass+asds+alds+ats+ars+afs+ans;
-            int minwagelawnew = (Communist.getMinwage()*acs+Socialist.getMinwage()*ass+SocialDemocrat.getMinwage()*asds+LiberalDemocrat.getMinwage()*alds+Conservative.getMinwage()*ats+Reactionary.getMinwage()*ars+Fascist.getMinwage()*afs+NationalSocialist.getMinwage()*ans)/s;
-            MinimumWageN.setText("%ASDHKASD");
-            //MinimumWageN.setText(minwagelawnew + "%");
+            double dminw = (Communist.getMinwage()*acs+Socialist.getMinwage()*ass+SocialDemocrat.getMinwage()*asds+LiberalDemocrat.getMinwage()*alds+Conservative.getMinwage()*ats+Reactionary.getMinwage()*ars+Fascist.getMinwage()*afs+NationalSocialist.getMinwage()*ans)/seatsfilled;
+            dminw = Math.round(dminw * 100);
+            dminw = dminw/100;
+            MinimumWageN.setText("" + dminw);
+            
+            double dpen = (Communist.getPens()*acs+Socialist.getPens()*ass+SocialDemocrat.getPens()*asds+LiberalDemocrat.getPens()*alds+Conservative.getPens()*ats+Reactionary.getPens()*ars+Fascist.getPens()*afs+NationalSocialist.getPens()*ans)/seatsfilled;
+            dpen = Math.round(dpen * 100);
+            dpen = dpen/100;
+            PensionN.setText("" + dpen);
+            
+            double dhc = (Communist.getHc()*acs+Socialist.getHc()*ass+SocialDemocrat.getHc()*asds+LiberalDemocrat.getHc()*alds+Conservative.getHc()*ats+Reactionary.getHc()*ars+Fascist.getHc()*afs+NationalSocialist.getHc()*ans)/seatsfilled;
+            dhc = Math.round(dhc * 100);
+            dhc = dhc/100;
+            HealthCareN.setText("" + dhc);
+            
+            double dtax = (Communist.getTax()*acs+Socialist.getTax()*ass+SocialDemocrat.getTax()*asds+LiberalDemocrat.getTax()*alds+Conservative.getTax()*ats+Reactionary.getTax()*ars+Fascist.getTax()*afs+NationalSocialist.getTax()*ans)/seatsfilled;
+            dtax = Math.round(dtax * 100);
+            dtax = dtax/100;
+            TaxN.setText("" + dtax);
+            
+            double dpub = (Communist.getPubsec()*acs+Socialist.getPubsec()*ass+SocialDemocrat.getPubsec()*asds+LiberalDemocrat.getPubsec()*alds+Conservative.getPubsec()*ats+Reactionary.getPubsec()*ars+Fascist.getPubsec()*afs+NationalSocialist.getPubsec()*ans)/seatsfilled;
+            dpub = Math.round(dpub * 100);
+            dpub = dpub/100;
+            PubN.setText("" + dpub);
         });
         
         
