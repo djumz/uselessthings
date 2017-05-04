@@ -527,7 +527,7 @@ public class Polgame extends Application {
             HBox policiesh3 = new HBox(20);
             policiesh3.alignmentProperty();
                 Pane stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable = new Pane();
-                stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable.setPrefSize(50, 1);
+                stupidthingthatihavetousebecausethisfuckingprogramminglanguagedoesntallowmetoproperlymakeadecentlookingtable.setPrefSize(72, 1);
                 VBox policiesv6 = new VBox(20);
                     Label Sufferage = new Label("         Sufferage");
                     Button suffb = new Button();                    /**Just for the record, css doesn't work. I'm not an idiot. I would have*/
@@ -563,9 +563,6 @@ public class Polgame extends Application {
                 party Fascist = new party("Fascist", "Fascism", 2, "#020209", 1, 4, 3, 3, 4, false, false, true, false, true);                      //gsf.setFill(Paint.valueOf(Fascist.getColour()));
                 party NationalSocialist = new party("NSP", "National Socialism", 8, "#8B4513", 1, 5, 4, 3, 5, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
 
-        Button ELECTIONS = new Button();
-        ELECTIONS.setText("ELECTIONS");
-        ELECTIONS.setOnAction((ActionEvent e) -> {
                 party[] partys = new party[8];
                 partys[0] = Communist;
                 partys[1] = Socialist;
@@ -575,6 +572,10 @@ public class Polgame extends Application {
                 partys[5] = Reactionary;
                 partys[6] = Fascist;
                 partys[7] = NationalSocialist;
+                
+        Button ELECTIONS = new Button();
+        ELECTIONS.setText("ELECTIONS");
+        ELECTIONS.setOnAction((ActionEvent e) -> {
                 
             for(int j = 0; j < 8; j++){
                     int cs = (int) Math.round (partys[0].getVotewon()*(0.18 + 0.02*j));
@@ -678,12 +679,6 @@ public class Polgame extends Application {
         });
         
         
-        
-        
-        
-        
-        
-        
         ap.getChildren().addAll(lmyseats, lmypercent, lmyideol);
         
         
@@ -710,6 +705,29 @@ public class Polgame extends Application {
                 redredova[i][j].setLayoutX(redredova[i][j].getLayoutX() + 40);
                 redredova[i][j].setLayoutY(redredova[i][j].getLayoutY() + 20);
                 ap.getChildren().add(redredova[i][j]);
+                redredova[i][j].setOnMouseEntered(e -> {
+                    myparty.setText("" + 4);
+                    for (int a = 0; a<redredova.length; a++){
+                        for (int b = 0; b<redredova[a].length; b++){
+                            if (redredova[a][b].getFill().toString().equals(Paint.valueOf(partys[Integer.valueOf(myparty.getText())].getColour()).toString())){
+                                //redredova[a][b].setStroke(redredova[a][b].getFill());   this line neither works nor would i want it to work
+                                redredova[a][b].setStrokeWidth(1.5);
+                                //Platform.exit();
+                            }
+                        }
+                    }
+                });
+                redredova[i][j].setOnMouseExited(e -> {
+                    for (int a = 0; a<redredova.length; a++){
+                        for (int b = 0; b<redredova[a].length; b++){
+                            //if (redredova[a][b].getFill().toString().equals(redredova[i][j].getFill().toString())){
+                                redredova[a][b].setStroke(redredova[0][0].getFill());
+                                redredova[a][b].setStrokeWidth(0);
+                                //Platform.exit();
+                            //}
+                        }
+                    }
+                });
             }
         }
         ap.getChildren().addAll(menuBar, ELECTIONS);
