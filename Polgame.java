@@ -554,14 +554,14 @@ public class Polgame extends Application {
                 
         AnchorPane ap = new AnchorPane();
         ap.getChildren().add(policiesv);
-                party Communist = new party("CP", "Communism", 6, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
-                party Socialist = new party("SP", "Socialism", 2.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
-                party SocialDemocrat = new party("SDP", "Social Democracy", 34, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
-                party LiberalDemocrat = new party("LDP", "Liberalism", 5, "#eaf455", 3, 3, 3, 3, 3, true, true, true, true, true);                  //gsld.setFill(Paint.valueOf(LiberalDemocrat.getColour()));
-                party Conservative = new party("Tory", "Conservatism", 34, "#2b20f9", 2, 3, 2, 2, 2, false, true, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
-                party Reactionary = new party("UKIP", "Monarchism", 2.5, "#0E1A8A", 2, 3, 2, 2, 3, false, false, false, false, true);              // gsr.setFill(Paint.valueOf(Reactionary.getColour()));
+                party Communist = new party("Communist Party", "Communism", 6, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
+                party Socialist = new party("Socialist Party", "Socialism", 2.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
+                party SocialDemocrat = new party("Social Democrats", "Social Democracy", 34, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
+                party LiberalDemocrat = new party("Liberal Democrats", "Liberalism", 5, "#eaf455", 3, 3, 3, 3, 3, true, true, true, true, true);                  //gsld.setFill(Paint.valueOf(LiberalDemocrat.getColour()));
+                party Conservative = new party("Conservative Party", "Conservatism", 34, "#2b20f9", 2, 3, 2, 2, 2, false, true, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
+                party Reactionary = new party("Restoration Party", "Monarchism", 2.5, "#0E1A8A", 2, 3, 2, 2, 3, false, false, false, false, true);              // gsr.setFill(Paint.valueOf(Reactionary.getColour()));
                 party Fascist = new party("Fascist", "Fascism", 2, "#020209", 1, 4, 3, 3, 4, false, false, true, false, true);                      //gsf.setFill(Paint.valueOf(Fascist.getColour()));
-                party NationalSocialist = new party("NSP", "National Socialism", 8, "#8B4513", 1, 5, 4, 3, 5, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
+                party NationalSocialist = new party("National Socialist Party", "National Socialism", 8, "#8B4513", 1, 5, 4, 3, 5, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
 
                 party[] partys = new party[8];
                 partys[0] = Communist;
@@ -677,25 +677,6 @@ public class Polgame extends Application {
             PubN.setText("" + dpub);
         });
         
-        /*s1.setOnMouseEntered(e -> {
-        for (int j = 0; j < 8; j++){
-            if (s1.getFill().equals(Paint.valueOf(partys[j].getColour()))) {
-                mypartyname.setText("" + partys[j].getName());
-                lmyseats.setText(as[j] + " seats");
-                lmypercent.setText(partys[j].getVotewon() + "%");
-                lmyideol.setText(partys[j].getIdeology() + "");
-            }
-        }
-            
-        for (Circle[] redredova1 : redredova) {
-            for (Circle redredova11 : redredova1) {
-              if (redredova11.getFill().equals(s1.getFill()))) {
-                    
-               }
-            }
-        }
-        });*/
-        
         ap.getChildren().addAll(lmyseats, lmypercent, lmyideol);
         
         
@@ -731,13 +712,22 @@ public class Polgame extends Application {
                             }
                         }
                     }
+                    boolean foundparty = false;
                     for (int j = 0; j < 8; j++){
                         if (item.getFill().equals(Paint.valueOf(partys[j].getColour()))) {
-                        mypartyname.setText("" + partys[j].getName());
-                        lmyseats.setText(as[j] + " seats");
-                        lmypercent.setText(partys[j].getVotewon() + "%");
-                        lmyideol.setText(partys[j].getIdeology() + "");
-            }
+                            foundparty = true;
+                            mypartyname.setText("" + partys[j].getName());
+                            lmyseats.setText(as[j] + " seats");
+                            lmypercent.setText(partys[j].getVotewon() + "%");
+                            lmyideol.setText(partys[j].getIdeology() + "");
+                        }
+                        if (foundparty == false)
+                        {
+                            mypartyname.setText("Independents");
+                            lmyseats.setText((200 - as[0] - as[1] - as[2] - as[3] - as[4] - as[5] - as[6] - as[7]) + " seats");
+                            lmypercent.setText("");
+                            lmyideol.setText("");
+                        }
         }
                 });
                 item.setOnMouseExited(e -> {
