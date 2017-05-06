@@ -572,7 +572,7 @@ public class Polgame extends Application {
                 partys[5] = Reactionary;
                 partys[6] = Fascist;
                 partys[7] = NationalSocialist;
-                
+        int[] as = new int[8];
         Button ELECTIONS = new Button();
         ELECTIONS.setText("ELECTIONS");
         ELECTIONS.setOnAction((ActionEvent e) -> {
@@ -611,7 +611,6 @@ public class Polgame extends Application {
                             redredova[j][18+j*2-ns-fs-rs-1-m].setFill(Paint.valueOf(partys[4].getColour()));
                         }
             }  
-                int[] as = new int[8];
                 int acs = 0;    as[0] = acs;
                 int ass = 0;    as[1] = ass;
                 int asds = 0;   as[2] = asds;
@@ -624,7 +623,7 @@ public class Polgame extends Application {
                 for (int p = 0; p<8; p++){
                     for (int i = 0; i<redredova.length; i++){
                         for (int j = 0; j<redredova[i].length; j++){
-                            if (redredova[i][j].getFill().toString().equals(Paint.valueOf(partys[p].getColour()).toString())){
+                            if (redredova[i][j].getFill().equals(Paint.valueOf(partys[p].getColour()))){
                                 as[p]++;
                                 seatsfilled++;
                             }
@@ -678,6 +677,24 @@ public class Polgame extends Application {
             PubN.setText("" + dpub);
         });
         
+        /*s1.setOnMouseEntered(e -> {
+        for (int j = 0; j < 8; j++){
+            if (s1.getFill().equals(Paint.valueOf(partys[j].getColour()))) {
+                mypartyname.setText("" + partys[j].getName());
+                lmyseats.setText(as[j] + " seats");
+                lmypercent.setText(partys[j].getVotewon() + "%");
+                lmyideol.setText(partys[j].getIdeology() + "");
+            }
+        }
+            
+        for (Circle[] redredova1 : redredova) {
+            for (Circle redredova11 : redredova1) {
+              if (redredova11.getFill().equals(s1.getFill()))) {
+                    
+               }
+            }
+        }
+        });*/
         
         ap.getChildren().addAll(lmyseats, lmypercent, lmyideol);
         
@@ -700,36 +717,47 @@ public class Polgame extends Application {
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
         
         /** goes through all 200 seats and puts them on the anchorpane*/
-        for (int i = 0; i<redredova.length; i++){
-            for (int j = 0; j<redredova[i].length; j++){
-                redredova[i][j].setLayoutX(redredova[i][j].getLayoutX() + 40);
-                redredova[i][j].setLayoutY(redredova[i][j].getLayoutY() + 20);
-                ap.getChildren().add(redredova[i][j]);
-                redredova[i][j].setOnMouseEntered(e -> {
-                    myparty.setText("" + 4);
-                    for (int a = 0; a<redredova.length; a++){
-                        for (int b = 0; b<redredova[a].length; b++){
-                            if (redredova[a][b].getFill().toString().equals(Paint.valueOf(partys[Integer.valueOf(myparty.getText())].getColour()).toString())){
-                                //redredova[a][b].setStroke(redredova[a][b].getFill());   this line neither works nor would i want it to work
-                                redredova[a][b].setStrokeWidth(1.5);
-                                //Platform.exit();
+        for (Circle[] redredova1 : redredova) {
+            for (Circle item : redredova1) {
+                item.setLayoutX(item.getLayoutX() + 40);
+                item.setLayoutY(item.getLayoutY() + 20);
+                ap.getChildren().add(item);
+                item.setOnMouseEntered(e -> {
+                    for (Circle[] redredova2 : redredova) {
+                        for (Circle item1 : redredova2) {
+                            if (item.getFill().equals(item1.getFill())) {
+                                item1.setStroke(Paint.valueOf("#000000"));
+                                item1.setStrokeWidth(1.5);
                             }
                         }
                     }
+                    for (int j = 0; j < 8; j++){
+                        if (item.getFill().equals(Paint.valueOf(partys[j].getColour()))) {
+                        mypartyname.setText("" + partys[j].getName());
+                        lmyseats.setText(as[j] + " seats");
+                        lmypercent.setText(partys[j].getVotewon() + "%");
+                        lmyideol.setText(partys[j].getIdeology() + "");
+            }
+        }
                 });
-                redredova[i][j].setOnMouseExited(e -> {
-                    for (int a = 0; a<redredova.length; a++){
-                        for (int b = 0; b<redredova[a].length; b++){
-                            //if (redredova[a][b].getFill().toString().equals(redredova[i][j].getFill().toString())){
-                                redredova[a][b].setStroke(redredova[0][0].getFill());
-                                redredova[a][b].setStrokeWidth(0);
-                                //Platform.exit();
-                            //}
+                item.setOnMouseExited(e -> {
+                    for (Circle[] redredova2 : redredova) {
+                        for (Circle item1 : redredova2) {
+                            if (item.getFill().equals(item1.getFill())) {
+                                item1.setStroke(Paint.valueOf("#000000"));
+                                item1.setStrokeWidth(0);
+                            }
                         }
                     }
+                    mypartyname.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
+                    lmyseats.setText(as[Integer.valueOf(myparty.getText())] + " seats");
+                    lmypercent.setText(partys[Integer.valueOf(myparty.getText())].getVotewon() + "%");
+                    lmyideol.setText(partys[Integer.valueOf(myparty.getText())].getIdeology() + "");
                 });
             }
         }
+        
+        
         ap.getChildren().addAll(menuBar, ELECTIONS);
         root.getChildren().addAll(ap);
         
@@ -817,13 +845,30 @@ public class Polgame extends Application {
         myparty.setStyle("-fx-text-fill: #585c63");
         root.getChildren().addAll(myparty);
         
+        /*Button[] pickpartybuttons = new Button[8];
+        pickpartybuttons[0] = bcom;
+        pickpartybuttons[1] = bsoc;
+        pickpartybuttons[2] = bsde;
+        pickpartybuttons[3] = blde;
+        pickpartybuttons[4] = bcon;         simplifying things
+        pickpartybuttons[5] = brea;         is complicated!
+        pickpartybuttons[6] = bfas;         
+        pickpartybuttons[7] = bnaz;
+        
+        for (int i = 0; i<8; i++){
+            pickpartybuttons[i].setOnAction(e -> {
+                myparty.setText("" + i);
+            tfpartyname.setText("National Socialist Party");
+            });
+        }*/
         
         Button gotogamescene = new Button();
         gotogamescene.setText("     GO TO PARLIAMENT     ");
         gotogamescene.setStyle("-fx-background-color: #585c63; -fx-text-fill: #000000; -fx-background-radius:6; -fx-padding: 15px 32px; -fx-width: 2350px; -fx-text-size: 56px;");
         gotogamescene.setOnAction(e -> {
             //mypartyname.setText("");
-            mypartyname.setText("" + tfpartyname.getText());
+            partys[Integer.valueOf(myparty.getText())].setName(tfpartyname.getText());
+            mypartyname.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
             primaryStage.setScene(gamescene);
         });
         ap.getChildren().addAll(mypartyname);
