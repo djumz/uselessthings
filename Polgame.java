@@ -537,7 +537,35 @@ public class Polgame extends Application {
                     Button warb = new Button();
                     warb.setText("    Declare War    ");
 
-                    policiesv.getChildren().addAll(policiesh1, policiesh2, policiesh3);
+        poll.setStyle("-fx-background-color: #4CAF50;");
+        imm.setStyle("-fx-background-color: #4CAF50;");
+        pubed.setStyle("-fx-background-color: #4CAF50;");
+        suffb.setStyle("-fx-background-color: #4CAF50;");
+        warb.setStyle("-fx-background-color: #4CAF50;");
+        //suffb.setDisable(true);
+        MinimumWageN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        PensionN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        HealthCareN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        TaxN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        PubN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        MinimumWage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        Pension.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        HealthCare.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        Tax.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        Pub.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        Sufferage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
+        War.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
+        
+        suffb.setOnAction(e -> {
+            if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
+                suffb.setStyle("-fx-background-color: #ff4040;");
+            }
+            if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@a27460a")){
+                suffb.setStyle("-fx-background-color: #4CAF50;");
+            }
+            });
+        
+        policiesv.getChildren().addAll(policiesh1, policiesh2, policiesh3);
             policiesh1.getChildren().addAll(policiesv1, policiesv2, policiesv3, policiesv4, policiesv5);
                 policiesv1.getChildren().addAll(MinimumWage, MinimumWageN);
                 policiesv2.getChildren().addAll(Pension, PensionN);
@@ -756,11 +784,12 @@ public class Polgame extends Application {
         HBox hb1 = new HBox(20);
         HBox hb2 = new HBox(20);
         HBox hb3 = new HBox(20);
+        HBox hb4 = new HBox(20);
         
         Scene gamescene = new Scene(root, 900, 750);
         Scene pickpartyscene = new Scene(rootpick, 1470, 700);
-        gamescene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());      
-        pickpartyscene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+        gamescene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());      
+        pickpartyscene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
                 
         primaryStage.setTitle("PolGame");
         primaryStage.setScene(pickpartyscene);
@@ -771,10 +800,15 @@ public class Polgame extends Application {
         pickyourparty.setStyle("-fx-text-fill: aliceblue; -fx-font-size: 72px;");
         hb2.getChildren().addAll(pickyourparty);
         
-        Label pickpartyname = new Label("Party Name:   ");
+        Label pickpartyname = new Label("Party Name:        ");
         TextField tfpartyname = new TextField();
         pickpartyname.setStyle("-fx-text-fill: aliceblue; -fx-font-size: 32px;");
         tfpartyname.setStyle("-fx-font-size: 22px;");
+        
+        Label pickpartyideol = new Label("Party Ideology:    ");
+        TextField tfpartyideol = new TextField();
+        pickpartyideol.setStyle("-fx-text-fill: aliceblue; -fx-font-size: 32px;");
+        tfpartyideol.setStyle("-fx-font-size: 22px;");
         
         Button bcom = new Button();
         bcom.setText("    Communist    ");
@@ -782,6 +816,7 @@ public class Polgame extends Application {
         bcom.setOnAction(e -> {
             myparty.setText("0");
             tfpartyname.setText("Communist Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button bsoc = new Button();
         bsoc.setText("    Socialist    ");
@@ -789,6 +824,7 @@ public class Polgame extends Application {
         bsoc.setOnAction(e -> {
             myparty.setText("1");
             tfpartyname.setText("Socialist Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button bsde = new Button();
         bsde.setText(" Social Democrat ");
@@ -796,6 +832,7 @@ public class Polgame extends Application {
         bsde.setOnAction(e -> {
             myparty.setText("2");
             tfpartyname.setText("Social Democratic Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button blde = new Button();
         blde.setText("  Social Liberal  ");
@@ -803,6 +840,7 @@ public class Polgame extends Application {
         blde.setOnAction(e -> {
             myparty.setText("3");
             tfpartyname.setText("Social Liberal Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button bcon = new Button();
         bcon.setText("   Conservative   ");
@@ -810,6 +848,7 @@ public class Polgame extends Application {
         bcon.setOnAction(e -> {
             myparty.setText("4");
             tfpartyname.setText("Conservative Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button brea = new Button();
         brea.setText("   Reactionary   ");
@@ -817,6 +856,7 @@ public class Polgame extends Application {
         brea.setOnAction(e -> {
             myparty.setText("5");
             tfpartyname.setText("Reactionary Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button bfas = new Button();
         bfas.setText("    Fascist    ");
@@ -824,6 +864,7 @@ public class Polgame extends Application {
         bfas.setOnAction(e -> {
             myparty.setText("6");
             tfpartyname.setText("Fascist Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         Button bnaz = new Button();
         bnaz.setText("National Socialist");
@@ -831,6 +872,7 @@ public class Polgame extends Application {
         bnaz.setOnAction(e -> {
             myparty.setText("7");
             tfpartyname.setText("National Socialist Party");
+            tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
         });
         myparty.setStyle("-fx-text-fill: #585c63");
         root.getChildren().addAll(myparty);
@@ -858,14 +900,17 @@ public class Polgame extends Application {
         gotogamescene.setOnAction(e -> {
             //mypartyname.setText("");
             partys[Integer.valueOf(myparty.getText())].setName(tfpartyname.getText());
+            partys[Integer.valueOf(myparty.getText())].setIdeology(tfpartyideol.getText());
             mypartyname.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
+            lmyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
             primaryStage.setScene(gamescene);
         });
         ap.getChildren().addAll(mypartyname);
                     
-        hb3.getChildren().addAll(pickpartyname, tfpartyname, gotogamescene);
+        hb3.getChildren().addAll(pickpartyname, tfpartyname);
+        hb4.getChildren().addAll(pickpartyideol, tfpartyideol, gotogamescene);
         
-        vb1.getChildren().addAll(hb1, hb2, hb3);
+        vb1.getChildren().addAll(hb1, hb2, hb3, hb4);
         
         rootpick.getChildren().add(vb1);
         hb1.getChildren().addAll(bcom, bsoc, bsde, blde, bcon, brea, bfas, bnaz);
