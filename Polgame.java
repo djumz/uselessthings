@@ -537,8 +537,8 @@ public class Polgame extends Application {
                     Button warb = new Button();
                     warb.setText("    Declare War    ");
 
-        poll.setStyle("-fx-background-color: #4CAF50;");
-        imm.setStyle("-fx-background-color: #4CAF50;");
+        poll.setStyle("-fx-background-color: #ff4040;");
+        imm.setStyle("-fx-background-color: #ff4040;");
         pubed.setStyle("-fx-background-color: #4CAF50;");
         suffb.setStyle("-fx-background-color: #4CAF50;");
         warb.setStyle("-fx-background-color: #4CAF50;");
@@ -556,12 +556,45 @@ public class Polgame extends Application {
         Sufferage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
         War.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
         
+        
+        poll.setOnAction(e -> {
+            if(poll.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
+                poll.setStyle("-fx-background-color: #ff4040;");
+            }
+            else{
+                poll.setStyle("-fx-background-color: #4CAF50;");
+            }
+            });
+        imm.setOnAction(e -> {
+            if(imm.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
+                imm.setStyle("-fx-background-color: #ff4040;");
+            }
+            else{
+                imm.setStyle("-fx-background-color: #4CAF50;");
+            }
+            });
+        pubed.setOnAction(e -> {
+            if(pubed.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
+                pubed.setStyle("-fx-background-color: #ff4040;");
+            }
+            else{
+                pubed.setStyle("-fx-background-color: #4CAF50;");
+            }
+            });
         suffb.setOnAction(e -> {
             if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
                 suffb.setStyle("-fx-background-color: #ff4040;");
             }
-            if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@a27460a")){
+            /*if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@a274602a"))*/else{
                 suffb.setStyle("-fx-background-color: #4CAF50;");
+            }
+            });
+        warb.setOnAction(e -> {
+            if(warb.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
+                warb.setStyle("-fx-background-color: #ff4040;");
+            }
+            else{
+                warb.setStyle("-fx-background-color: #4CAF50;");
             }
             });
         
@@ -682,27 +715,27 @@ public class Polgame extends Application {
             double dminw = (Communist.getMinwage()*acs+Socialist.getMinwage()*ass+SocialDemocrat.getMinwage()*asds+LiberalDemocrat.getMinwage()*alds+Conservative.getMinwage()*ats+Reactionary.getMinwage()*ars+Fascist.getMinwage()*afs+NationalSocialist.getMinwage()*ans)/seatsfilled;
             dminw = Math.round(dminw * 100);
             dminw = dminw/100;
-            MinimumWageN.setText("" + dminw);
+            MinimumWageN.setText("          " + dminw);
             
             double dpen = (Communist.getPens()*acs+Socialist.getPens()*ass+SocialDemocrat.getPens()*asds+LiberalDemocrat.getPens()*alds+Conservative.getPens()*ats+Reactionary.getPens()*ars+Fascist.getPens()*afs+NationalSocialist.getPens()*ans)/seatsfilled;
             dpen = Math.round(dpen * 100);
             dpen = dpen/100;
-            PensionN.setText("" + dpen);
+            PensionN.setText("   " + dpen);
             
             double dhc = (Communist.getHc()*acs+Socialist.getHc()*ass+SocialDemocrat.getHc()*asds+LiberalDemocrat.getHc()*alds+Conservative.getHc()*ats+Reactionary.getHc()*ars+Fascist.getHc()*afs+NationalSocialist.getHc()*ans)/seatsfilled;
             dhc = Math.round(dhc * 100);
             dhc = dhc/100;
-            HealthCareN.setText("" + dhc);
+            HealthCareN.setText("     " + dhc);
             
             double dtax = (Communist.getTax()*acs+Socialist.getTax()*ass+SocialDemocrat.getTax()*asds+LiberalDemocrat.getTax()*alds+Conservative.getTax()*ats+Reactionary.getTax()*ars+Fascist.getTax()*afs+NationalSocialist.getTax()*ans)/seatsfilled;
             dtax = Math.round(dtax * 100);
             dtax = dtax/100;
-            TaxN.setText("" + dtax);
+            TaxN.setText("     " + dtax);
             
             double dpub = (Communist.getPubsec()*acs+Socialist.getPubsec()*ass+SocialDemocrat.getPubsec()*asds+LiberalDemocrat.getPubsec()*alds+Conservative.getPubsec()*ats+Reactionary.getPubsec()*ars+Fascist.getPubsec()*afs+NationalSocialist.getPubsec()*ans)/seatsfilled;
             dpub = Math.round(dpub * 100);
             dpub = dpub/100;
-            PubN.setText("" + dpub);
+            PubN.setText("      " + dpub);
         });
         
         ap.getChildren().addAll(lmyseats, lmypercent, lmyideol);
@@ -788,8 +821,8 @@ public class Polgame extends Application {
         
         Scene gamescene = new Scene(root, 900, 750);
         Scene pickpartyscene = new Scene(rootpick, 1470, 700);
-        gamescene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());      
-        pickpartyscene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        gamescene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());      
+        pickpartyscene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
                 
         primaryStage.setTitle("PolGame");
         primaryStage.setScene(pickpartyscene);
