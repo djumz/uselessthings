@@ -54,16 +54,24 @@ public class Polgame extends Application {
         Label lmypercent = new Label("");
         Label mypartyname = new Label("");
         Label lmyideol = new Label("");
-        /*int minwagelaw = 3;
-        int pensionlaw = 3;
-        int hclaw = 3;
-        int taxlaw = 3;
-        int publaw = 3;
-        boolean polllaw = false;
-        boolean immlaw = false;
-        boolean pubedlaw = true;
-        boolean sufflaw = true;
-        boolean warlaw = true;*/
+        Label partysopinion = new Label("Parties' Opinion");
+        partysopinion.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        partysopinion.setLayoutX(766);
+        partysopinion.setLayoutY(61);
+        Label peoplesopinion = new Label("People's Opinion");
+        peoplesopinion.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+        peoplesopinion.setLayoutX(926);
+        peoplesopinion.setLayoutY(61);
+        int peomnw = 3;
+        int peopen = 3;
+        int peohcr = 3;
+        int peotax = 3;
+        int peopub = 3;
+        boolean peopol = true;
+        boolean peoimm = false;
+        boolean peopbd = false;
+        boolean peosuf = true;
+        boolean peowar = true;
         mypartyname.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18px;");
         mypartyname.setLayoutX(20);
         mypartyname.setLayoutY(50);
@@ -612,9 +620,9 @@ public class Polgame extends Application {
             
         policiesv.setLayoutX(100);
         policiesv.setLayoutY(350);
-                
-        AnchorPane ap = new AnchorPane();
-        ap.getChildren().add(policiesv);
+        
+        
+        
                 party Communist = new party("Communist Party", "Communism", 6, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
                 party Socialist = new party("Socialist Party", "Socialism", 2.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
                 party SocialDemocrat = new party("Social Democrats", "Social Democracy", 34, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
@@ -634,6 +642,150 @@ public class Polgame extends Application {
                 partys[6] = Fascist;
                 partys[7] = NationalSocialist;
         int[] as = new int[8];
+        
+        HBox mypoliciesh = new HBox(20);
+            VBox mypoliciesv1 = new VBox(31);
+                Label myMinimumWage = new Label("Minimum Wage");
+                Label myPension = new Label("Pensions");
+                Label myHealthCare = new Label("Health Care");
+                Label myTax = new Label("High Taxes");
+                Label myPub = new Label("Public Sector");
+                Label myPoll = new Label("Public Sector");
+                Label myImm = new Label("Public Sector");
+                Label myPubed = new Label("Public Sector");
+                Label mySufferage = new Label("Public Sector");
+                Label myWar = new Label("Public Sector");
+                myMinimumWage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myPension.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myHealthCare.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myTax.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myPub.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myPoll.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myImm.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myPubed.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                mySufferage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                myWar.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+            VBox mypoliciesv2 = new VBox(20);
+            
+                HBox mypoliciesh1 = new HBox(20);
+                    Button myminwageminus = new Button();
+                    Label myminwage = new Label();
+                    myminwage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    myminwageminus.setText(" - ");
+                    myminwageminus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setMinwage(partys[Integer.valueOf(myparty.getText())].getMinwage()-1);
+                                                     myminwage.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());});
+                    Button myminwageplus = new Button();
+                    myminwageplus.setText(" + ");
+                    myminwageplus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setMinwage(partys[Integer.valueOf(myparty.getText())].getMinwage()+1);
+                                                    myminwage.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());});
+                    Label iamashamedofdoingthisbutimverytiredandcantthinkclearly1 = new Label(" ");
+                    Button peominwageminus = new Button();
+                    Label peominwage = new Label("" + peomnw);
+                    peominwage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    peominwageminus.setText(" - ");
+                    peominwageminus.setOnAction(e -> {peominwage.setText((Integer.valueOf(peominwage.getText())-1) + "");});                           
+                    Button peominwageplus = new Button();
+                    peominwageplus.setText(" + ");
+                    peominwageplus.setOnAction(e -> {peominwage.setText((Integer.valueOf(peominwage.getText())+1) + "");});
+                    
+                HBox mypoliciesh2 = new HBox(20);
+                    Button mypensionminus = new Button();
+                    Label mypension = new Label();
+                    mypension.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    mypensionminus.setText(" - ");
+                    mypensionminus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setPens(partys[Integer.valueOf(myparty.getText())].getPens()-1);
+                                                     mypension.setText("" + partys[Integer.valueOf(myparty.getText())].getPens());});
+                    Button mypensionplus = new Button();
+                    mypensionplus.setText(" + ");
+                    mypensionplus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setMinwage(partys[Integer.valueOf(myparty.getText())].getMinwage()+1);
+                                                    mypension.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());});
+                    Label iamashamedofdoingthisbutimverytiredandcantthinkclearly2 = new Label(" ");
+                    Button peopensionminus = new Button();
+                    Label peopension = new Label("" + peopen);
+                    peopension.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    peopensionminus.setText(" - ");
+                    peopensionminus.setOnAction(e -> {peopension.setText((Integer.valueOf(peopension.getText())-1) + "");});                           
+                    Button peopensionplus = new Button();
+                    peopensionplus.setText(" + ");
+                    peopensionplus.setOnAction(e -> {peopension.setText((Integer.valueOf(peopension.getText())+1) + "");});
+                HBox mypoliciesh3 = new HBox(20);
+                    Button myhcminus = new Button();
+                    Label myhc = new Label();
+                    myhc.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    myhcminus.setText(" - ");
+                    myhcminus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setHc(partys[Integer.valueOf(myparty.getText())].getHc()-1);
+                                                     myhc.setText("" + partys[Integer.valueOf(myparty.getText())].getHc());});
+                    Button myhcplus = new Button();
+                    myhcplus.setText(" + ");
+                    myhcplus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setHc(partys[Integer.valueOf(myparty.getText())].getHc()+1);
+                                                    myhc.setText("" + partys[Integer.valueOf(myparty.getText())].getHc());});
+                    Label iamashamedofdoingthisbutimverytiredandcantthinkclearly3 = new Label(" ");
+                    Button peohcnminus = new Button();
+                    Label peohc = new Label("" + peohcr);
+                    peohc.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    peohcnminus.setText(" - ");
+                    peohcnminus.setOnAction(e -> {peohc.setText((Integer.valueOf(peohc.getText())-1) + "");});                           
+                    Button peohcplus = new Button();
+                    peohcplus.setText(" + ");
+                    peohcplus.setOnAction(e -> {peohc.setText((Integer.valueOf(peohc.getText())+1) + "");});
+                HBox mypoliciesh4 = new HBox(20);
+                    Button mytaxminus = new Button();
+                    Label mytax = new Label();
+                    mytax.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 200px;");
+                    mytaxminus.setText(" - ");
+                    mytaxminus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setTax(partys[Integer.valueOf(myparty.getText())].getTax()-1);
+                                                     mytax.setText("" + partys[Integer.valueOf(myparty.getText())].getTax());});
+                    Button mytaxplus = new Button();
+                    mytaxplus.setText(" + ");
+                    mytaxplus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setTax(partys[Integer.valueOf(myparty.getText())].getTax()+1);
+                                                    mytax.setText("" + partys[Integer.valueOf(myparty.getText())].getTax());});
+                    Label iamashamedofdoingthisbutimverytiredandcantthinkclearly4 = new Label(" ");
+                    Button peotaxminus = new Button();
+                    Label lpeotax = new Label("" + peotax);
+                    lpeotax.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    peotaxminus.setText(" - ");
+                    peotaxminus.setOnAction(e -> {lpeotax.setText((Integer.valueOf(lpeotax.getText())-1) + "");});                           
+                    Button peotaxplus = new Button();
+                    peotaxplus.setText(" + ");
+                    peotaxplus.setOnAction(e -> {lpeotax.setText((Integer.valueOf(lpeotax.getText())+1) + "");});
+                HBox mypoliciesh5 = new HBox(20);
+                    Button mypubminus = new Button();
+                    Label mypub = new Label();
+                    mypub.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    mypubminus.setText(" - ");
+                    mypubminus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setPubsec(partys[Integer.valueOf(myparty.getText())].getPubsec()-1);
+                                                     mypub.setText("" + partys[Integer.valueOf(myparty.getText())].getPubsec());});
+                    Button mypubplus = new Button();
+                    mypubplus.setText(" + ");
+                    mypubplus.setOnAction(e -> {partys[Integer.valueOf(myparty.getText())].setPubsec(partys[Integer.valueOf(myparty.getText())].getPubsec()+1);
+                                                    mypub.setText("" + partys[Integer.valueOf(myparty.getText())].getPubsec());});
+                    Label iamashamedofdoingthisbutimverytiredandcantthinkclearly5 = new Label(" ");
+                    Button peopubminus = new Button();
+                    Label lpeopub = new Label("" + peopub);
+                    lpeopub.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
+                    peopubminus.setText(" - ");
+                    peopubminus.setOnAction(e -> {lpeopub.setText((Integer.valueOf(lpeopub.getText())-1) + "");});                           
+                    Button peopubplus = new Button();
+                    peopubplus.setText(" + ");
+                    peopubplus.setOnAction(e -> {lpeopub.setText((Integer.valueOf(lpeopub.getText())+1) + "");});
+                    
+            
+        
+        mypoliciesh.getChildren().addAll(mypoliciesv1, mypoliciesv2);
+            mypoliciesv1.getChildren().addAll(myMinimumWage, myPension, myHealthCare, myTax, myPub, myPoll, myImm, myPubed, mySufferage, myWar);
+            mypoliciesv2.getChildren().addAll(mypoliciesh1, mypoliciesh2, mypoliciesh3, mypoliciesh4, mypoliciesh5);
+                mypoliciesh1.getChildren().addAll(myminwageminus, myminwage, myminwageplus, iamashamedofdoingthisbutimverytiredandcantthinkclearly1, peominwageminus, peominwage, peominwageplus);
+                mypoliciesh2.getChildren().addAll(mypensionminus, mypension, mypensionplus, iamashamedofdoingthisbutimverytiredandcantthinkclearly2, peopensionminus, peopension, peopensionplus);
+                mypoliciesh3.getChildren().addAll(myhcminus, myhc, myhcplus, iamashamedofdoingthisbutimverytiredandcantthinkclearly3, peohcnminus, peohc, peohcplus);
+                mypoliciesh4.getChildren().addAll(mytaxminus, mytax, mytaxplus, iamashamedofdoingthisbutimverytiredandcantthinkclearly4, peotaxminus, lpeotax, peotaxplus);
+                mypoliciesh5.getChildren().addAll(mypubminus, mypub, mypubplus, iamashamedofdoingthisbutimverytiredandcantthinkclearly5, peopubminus, lpeopub, peopubplus);
+            
+        mypoliciesh.setLayoutX(630);
+        mypoliciesh.setLayoutY(100);
+        
+        AnchorPane ap = new AnchorPane();
+        ap.getChildren().addAll(policiesv, mypoliciesh, partysopinion, peoplesopinion);
+        
         Button ELECTIONS = new Button();
         ELECTIONS.setText("ELECTIONS");
         ELECTIONS.setOnAction((ActionEvent e) -> {
@@ -781,6 +933,11 @@ public class Polgame extends Application {
                             lmyseats.setText(as[j] + " seats");
                             lmypercent.setText(partys[j].getVotewon() + "%");
                             lmyideol.setText(partys[j].getIdeology() + "");
+                            myminwage.setText("" + partys[j].getMinwage());
+                            mypension.setText("" + partys[j].getPens());
+                            myhc.setText("" + partys[j].getHc());
+                            mytax.setText("" + partys[j].getTax());
+                            mypub.setText("" + partys[j].getPubsec());
                         }
                         if (foundparty == false)
                         {
@@ -788,8 +945,13 @@ public class Polgame extends Application {
                             lmyseats.setText((200 - as[0] - as[1] - as[2] - as[3] - as[4] - as[5] - as[6] - as[7]) + " seats");
                             lmypercent.setText("");
                             lmyideol.setText("");
+                            myminwage.setText("");
+                            mypension.setText("");
+                            myhc.setText("");
+                            mytax.setText("");
+                            mypub.setText("");
                         }
-        }
+                    }
                 });
                 item.setOnMouseExited(e -> {
                     for (Circle[] redredova2 : redredova) {
@@ -804,6 +966,11 @@ public class Polgame extends Application {
                     lmyseats.setText(as[Integer.valueOf(myparty.getText())] + " seats");
                     lmypercent.setText(partys[Integer.valueOf(myparty.getText())].getVotewon() + "%");
                     lmyideol.setText(partys[Integer.valueOf(myparty.getText())].getIdeology() + "");
+                    myminwage.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());
+                    mypension.setText("" + partys[Integer.valueOf(myparty.getText())].getPens());
+                    myhc.setText("" + partys[Integer.valueOf(myparty.getText())].getHc());
+                    mytax.setText("" + partys[Integer.valueOf(myparty.getText())].getTax());
+                    mypub.setText("" + partys[Integer.valueOf(myparty.getText())].getPubsec());
                 });
             }
         }
@@ -819,15 +986,16 @@ public class Polgame extends Application {
         HBox hb3 = new HBox(20);
         HBox hb4 = new HBox(20);
         
-        Scene gamescene = new Scene(root, 900, 750);
+        Scene gamescene = new Scene(root, 1300, 750);
         Scene pickpartyscene = new Scene(rootpick, 1470, 700);
         gamescene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());      
         pickpartyscene.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+        
                 
         primaryStage.setTitle("PolGame");
         primaryStage.setScene(pickpartyscene);
         primaryStage.show();
-        
+        //primaryStage.getIcons().add(javafx.scene.image.Image.impl_fromPlatformImage("image.png"));
         
         Label pickyourparty = new Label("                          Pick Your Party");
         pickyourparty.setStyle("-fx-text-fill: aliceblue; -fx-font-size: 72px;");
@@ -937,6 +1105,12 @@ public class Polgame extends Application {
             mypartyname.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
             lmyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
             primaryStage.setScene(gamescene);
+            myminwage.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());
+            mypension.setText("" + partys[Integer.valueOf(myparty.getText())].getPens());
+            myhc.setText("" + partys[Integer.valueOf(myparty.getText())].getHc());
+            mytax.setText("" + partys[Integer.valueOf(myparty.getText())].getTax());
+            mypub.setText("" + partys[Integer.valueOf(myparty.getText())].getPubsec());
+            
         });
         ap.getChildren().addAll(mypartyname);
                     
