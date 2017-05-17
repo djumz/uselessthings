@@ -915,13 +915,40 @@ public class Polgame extends Application {
                         modfy[i] = modfy[i] - 0.5;
                     }
                 }
+                if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 1){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] + 0.175;
+                    }
+                    modfy[p] = modfy[p] - 0.875;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] + 0.175;
+                    }
+                }
                 if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 4){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] + 0.25;
+                    }
+                    modfy[p] = modfy[p] - 1.75;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] + 0.5;
+                    }
+                }
+                if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 9){
                     for(int i = 0; i < p; i++){
                         modfy[i] = modfy[i] + 0.5;
                     }
                     modfy[p] = modfy[p] - 3.5;
                     for(int i = p+1; i < 8; i++){
                         modfy[i] = modfy[i] + 0.5;
+                    }
+                }
+                if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 16){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] + 0.7142857142857143;
+                    }
+                    modfy[p] = modfy[p] - 5;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] + 0.7142857142857143;
                     }
                 }
             }
@@ -940,37 +967,48 @@ public class Polgame extends Application {
         
         for(int p = 0; p < 8; p++){
             if(partys[p].getVotewon()+modfy[p] < 0){partys[p].setVotewon(0); modfy[p] = 0;}
+            if(partys[p].getVotewon()+modfy[p] > 100){partys[p].setVotewon(100); modfy[p] = 0;}
         }
+        
+        double aper = 0;
+        for(int p = 0; p < 8; p++){
+            aper = aper + partys[p].getVotewon()+modfy[p];
+        }
+        double h = 95/aper;
+        for(int p = 0; p < 8; p++){
+            partys[p].setVotewon((partys[p].getVotewon()+modfy[p])*h);
+        }
+        
             for(int j = 0; j < 8; j++){
-                    int cs = (int) Math.round ((partys[0].getVotewon()+modfy[0])*(0.18 + 0.02*j));
+                    int cs = (int) Math.round ((partys[0].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < cs; m++){
                             redredova[j][m].setFill(Paint.valueOf(partys[0].getColour()));
                         }
-                    int ss = (int) Math.round ((partys[1].getVotewon()+modfy[1])*(0.18 + 0.02*j));
+                    int ss = (int) Math.round ((partys[1].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < ss; m++){
                             redredova[j][cs+m].setFill(Paint.valueOf(partys[1].getColour()));
                         }
-                    int sds = (int) Math.round ((partys[2].getVotewon()+modfy[2])*(0.18 + 0.02*j));
+                    int sds = (int) Math.round ((partys[2].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < sds; m++){
                             redredova[j][cs+ss+m].setFill(Paint.valueOf(partys[2].getColour()));
                         }
-                    int lds = (int) Math.round ((partys[3].getVotewon()+modfy[3])*(0.18 + 0.02*j));
+                    int lds = (int) Math.round ((partys[3].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < lds; m++){
                             redredova[j][cs+ss+sds+m].setFill(Paint.valueOf(partys[3].getColour()));
                         }
-                    int ns = (int) Math.round ((partys[7].getVotewon()+modfy[7])*(0.18 + 0.02*j));
+                    int ns = (int) Math.round ((partys[7].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < ns; m++){
                             redredova[j][18+j*2-1-m].setFill(Paint.valueOf(partys[7].getColour()));
                         }
-                    int fs = (int) Math.round ((partys[6].getVotewon()+modfy[6])*(0.18 + 0.02*j));
+                    int fs = (int) Math.round ((partys[6].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < fs; m++){
                             redredova[j][18+j*2-ns-1-m].setFill(Paint.valueOf(partys[6].getColour()));
                         }
-                    int rs = (int) Math.round ((partys[5].getVotewon()+modfy[5])*(0.18 + 0.02*j));
+                    int rs = (int) Math.round ((partys[5].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < rs; m++){
                             redredova[j][18+j*2-ns-fs-1-m].setFill(Paint.valueOf(partys[5].getColour()));
                         }
-                    int ts = (int) Math.round ((partys[4].getVotewon()+modfy[4])*(0.18 + 0.02*j));
+                    int ts = (int) Math.round ((partys[4].getVotewon())*(0.18 + 0.02*j));
                     for(int m = 0; m < ts; m++){
                             redredova[j][18+j*2-ns-fs-rs-1-m].setFill(Paint.valueOf(partys[4].getColour()));
                         }
@@ -1007,7 +1045,7 @@ public class Polgame extends Application {
             lmyseats.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
             lmyseats.setLayoutX(20);
             lmyseats.setLayoutY(90);
-            lmypercent.setText((partys[Integer.valueOf(myparty.getText())].getVotewon() + modfy[Integer.valueOf(myparty.getText())]) + "%");
+            lmypercent.setText((partys[Integer.valueOf(myparty.getText())].getVotewon()) + "%");
             lmypercent.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
             lmypercent.setLayoutX(20);
             lmypercent.setLayoutY(110);
@@ -1096,7 +1134,7 @@ public class Polgame extends Application {
                             foundparty = true;
                             mypartyname.setText("" + partys[j].getName());
                             lmyseats.setText(as[j] + " seats");
-                            lmypercent.setText((partys[j].getVotewon() + modfy[j]) + "%");
+                            lmypercent.setText((partys[j].getVotewon()) + "%");
                             lmyideol.setText(partys[j].getIdeology() + "");
                             myminwage.setText("" + partys[j].getMinwage());
                             mypension.setText("" + partys[j].getPens());
@@ -1129,7 +1167,7 @@ public class Polgame extends Application {
                     }
                     mypartyname.setText("" + partys[Integer.valueOf(myparty.getText())].getName());
                     lmyseats.setText(as[Integer.valueOf(myparty.getText())] + " seats");
-                    lmypercent.setText((partys[Integer.valueOf(myparty.getText())].getVotewon() + modfy[Integer.valueOf(myparty.getText())]) + "%");
+                    lmypercent.setText((partys[Integer.valueOf(myparty.getText())].getVotewon()) + "%");
                     lmyideol.setText(partys[Integer.valueOf(myparty.getText())].getIdeology() + "");
                     myminwage.setText("" + partys[Integer.valueOf(myparty.getText())].getMinwage());
                     mypension.setText("" + partys[Integer.valueOf(myparty.getText())].getPens());
