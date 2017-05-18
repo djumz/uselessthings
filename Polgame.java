@@ -48,6 +48,12 @@ import jdk.nashorn.internal.runtime.JSType;
  */
 public class Polgame extends Application {
     
+    
+    public int fix(int p) {
+        if(p<1){p=1;}
+        if(p>5){p=5;}
+        return p;
+    }
     @Override
     public void start(Stage primaryStage) throws IOException {
         Label myparty = new Label("0");
@@ -757,10 +763,10 @@ public class Polgame extends Application {
                     Label peominwage = new Label("" + 3);
                     peominwage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
                     peominwageminus.setText(" - ");
-                    peominwageminus.setOnAction(e -> {peominwage.setText((Integer.valueOf(peominwage.getText())-1) + "");});                           
+                    peominwageminus.setOnAction(e -> {peominwage.setText(fix((Integer.valueOf(peominwage.getText())-1)) + "");});                           
                     Button peominwageplus = new Button();
                     peominwageplus.setText(" + ");
-                    peominwageplus.setOnAction(e -> {peominwage.setText((Integer.valueOf(peominwage.getText())+1) + "");});
+                    peominwageplus.setOnAction(e -> {peominwage.setText((fix(Integer.valueOf(peominwage.getText())+1)) + "");});
                     
                 HBox mypoliciesh2 = new HBox(20);
                     Button mypensionminus = new Button();
@@ -780,10 +786,10 @@ public class Polgame extends Application {
                     Label peopension = new Label("" + 3);
                     peopension.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
                     peopensionminus.setText(" - ");
-                    peopensionminus.setOnAction(e -> {peopension.setText((Integer.valueOf(peopension.getText())-1) + "");});                           
+                    peopensionminus.setOnAction(e -> {peopension.setText(fix((Integer.valueOf(peopension.getText())-1)) + "");});                           
                     Button peopensionplus = new Button();
                     peopensionplus.setText(" + ");
-                    peopensionplus.setOnAction(e -> {peopension.setText((Integer.valueOf(peopension.getText())+1) + "");});
+                    peopensionplus.setOnAction(e -> {peopension.setText(fix((Integer.valueOf(peopension.getText())+1)) + "");});
                 HBox mypoliciesh3 = new HBox(20);
                     Button myhcminus = new Button();
                     Label myhc = new Label();
@@ -802,10 +808,10 @@ public class Polgame extends Application {
                     Label peohc = new Label("" + 3);
                     peohc.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
                     peohcnminus.setText(" - ");
-                    peohcnminus.setOnAction(e -> {peohc.setText((Integer.valueOf(peohc.getText())-1) + "");});                           
+                    peohcnminus.setOnAction(e -> {peohc.setText(fix((Integer.valueOf(peohc.getText())-1)) + "");});                           
                     Button peohcplus = new Button();
                     peohcplus.setText(" + ");
-                    peohcplus.setOnAction(e -> {peohc.setText((Integer.valueOf(peohc.getText())+1) + "");});
+                    peohcplus.setOnAction(e -> {peohc.setText(fix(Integer.valueOf(peohc.getText())+1) + "");});
                 HBox mypoliciesh4 = new HBox(20);
                     Button mytaxminus = new Button();
                     Label mytax = new Label();
@@ -824,10 +830,10 @@ public class Polgame extends Application {
                     Label lpeotax = new Label("" + 3);
                     lpeotax.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
                     peotaxminus.setText(" - ");
-                    peotaxminus.setOnAction(e -> {lpeotax.setText((Integer.valueOf(lpeotax.getText())-1) + "");});                           
+                    peotaxminus.setOnAction(e -> {lpeotax.setText(fix(Integer.valueOf(lpeotax.getText())-1) + "");});                           
                     Button peotaxplus = new Button();
                     peotaxplus.setText(" + ");
-                    peotaxplus.setOnAction(e -> {lpeotax.setText((Integer.valueOf(lpeotax.getText())+1) + "");});
+                    peotaxplus.setOnAction(e -> {lpeotax.setText(fix(Integer.valueOf(lpeotax.getText())+1) + "");});
                 HBox mypoliciesh5 = new HBox(20);
                     Button mypubminus = new Button();
                     Label mypub = new Label();
@@ -846,10 +852,10 @@ public class Polgame extends Application {
                     Label lpeopub = new Label("" + 3);
                     lpeopub.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
                     peopubminus.setText(" - ");
-                    peopubminus.setOnAction(e -> {lpeopub.setText((Integer.valueOf(lpeopub.getText())-1) + "");});                           
+                    peopubminus.setOnAction(e -> {lpeopub.setText(fix(Integer.valueOf(lpeopub.getText())-1) + "");});                           
                     Button peopubplus = new Button();
                     peopubplus.setText(" + ");
-                    peopubplus.setOnAction(e -> {lpeopub.setText((Integer.valueOf(lpeopub.getText())+1) + "");});
+                    peopubplus.setOnAction(e -> {lpeopub.setText(fix(Integer.valueOf(lpeopub.getText())+1) + "");});
                     
             
         
@@ -908,7 +914,7 @@ public class Polgame extends Application {
             for(int o = 0; o < 5; o++){
                 if(allpos[p][o] == Integer.valueOf(peoplesopinions[o].getText())){
                     for(int i = 0; i < p; i++){
-                        modfy[i] = modfy[i] - 0.5;  //this line crashes
+                        modfy[i] = modfy[i] - 0.5;
                     }
                     modfy[p] = modfy[p] + 3.5;
                     for(int i = p+1; i < 8; i++){
@@ -935,11 +941,11 @@ public class Polgame extends Application {
                 }
                 if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 9){
                     for(int i = 0; i < p; i++){
-                        modfy[i] = modfy[i] + 0.5;
+                        modfy[i] = modfy[i] + 0.3;
                     }
-                    modfy[p] = modfy[p] - 3.5;
+                    modfy[p] = modfy[p] - 2.1;
                     for(int i = p+1; i < 8; i++){
-                        modfy[i] = modfy[i] + 0.5;
+                        modfy[i] = modfy[i] + 0.3;
                     }
                 }
                 if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) == 16){
@@ -951,6 +957,14 @@ public class Polgame extends Application {
                         modfy[i] = modfy[i] + 0.7142857142857143;
                     }
                 }
+                
+                /*if((allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText()))*(allpos[p][o]-Integer.valueOf(peoplesopinions[o].getText())) < 4){
+                    modfy[p] = modfy[p] + 1.5*Integer.valueOf(peoplesopinions[o].getText())*Integer.valueOf(peoplesopinions[o].getText()) - 5.5*Integer.valueOf(peoplesopinions[o].getText())+5;
+                }
+                else
+                {
+                    modfy[p] = modfy[p] - 0.5*Integer.valueOf(peoplesopinions[o].getText())*Integer.valueOf(peoplesopinions[o].getText()) - 0.5*Integer.valueOf(peoplesopinions[o].getText())+3;
+                }*/
             }
         }
         
@@ -960,10 +974,10 @@ public class Polgame extends Application {
         double dtax;
         double dpub;
         
-        modfy[0] = modfy[0] + Double.valueOf(pubdis.getText())*6;
-        modfy[7] = modfy[7] + Double.valueOf(pubdis.getText())*6;
-        modfy[1] = modfy[1] + Double.valueOf(pubdis.getText())*3;
-        modfy[6] = modfy[6] + Double.valueOf(pubdis.getText())*3;
+        modfy[0] = modfy[0] + Double.valueOf(pubdis.getText())*4;
+        modfy[7] = modfy[7] + Double.valueOf(pubdis.getText())*4;
+        modfy[1] = modfy[1] + Double.valueOf(pubdis.getText())*2;
+        modfy[6] = modfy[6] + Double.valueOf(pubdis.getText())*2;
         
         for(int p = 0; p < 8; p++){
             if(partys[p].getVotewon()+modfy[p] < 0){partys[p].setVotewon(0); modfy[p] = 0;}
@@ -1083,15 +1097,74 @@ public class Polgame extends Application {
             dpub = dpub/100;
             PubN.setText("      " + dpub);
             
-            pubdis.setText("" + (abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText()))));
+            pubdis.setText("" + (abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText())))/2);
             
         });
         Button nextturn = new Button();
         nextturn.setText("NEXT TURN ----->");
         nextturn.setOnAction(e -> {
+            /*for(int i = 0; i<5; i++){
+                peoplesopinions[i].setText(fix(Double.valueOf(peoplesopinions[i].getText())+0.1) + "");
+            }*/
             
+                int acs = 0;    as[0] = acs;
+                int ass = 0;    as[1] = ass;
+                int asds = 0;   as[2] = asds;
+                int alds = 0;   as[3] = alds;
+                int ats = 0;    as[4] = ats;
+                int ars = 0;    as[5] = ars;
+                int afs = 0;    as[6] = afs;
+                int ans = 0;    as[7] = ans;
+                double seatsfilled = 0.0;
+                for (int p = 0; p<8; p++){
+                    for (int i = 0; i<redredova.length; i++){
+                        for (int j = 0; j<redredova[i].length; j++){
+                            if (redredova[i][j].getFill().equals(Paint.valueOf(partys[p].getColour()))){
+                                as[p]++;
+                                seatsfilled++;
+                            }
+                        }
+                    }
+                }
+                acs = as[0];
+                ass = as[1];
+                asds = as[2];
+                alds = as[3];
+                ats = as[4];
+                ars = as[5];
+                afs = as[6];
+                ans = as[7];
+            double dminw = (Communist.getMinwage()*acs+Socialist.getMinwage()*ass+SocialDemocrat.getMinwage()*asds+LiberalDemocrat.getMinwage()*alds+Conservative.getMinwage()*ats+Reactionary.getMinwage()*ars+Fascist.getMinwage()*afs+NationalSocialist.getMinwage()*ans)/seatsfilled;
+            dminw = Math.round(dminw * 100);
+            dminw = dminw/100;
+            
+            double dpen = (Communist.getPens()*acs+Socialist.getPens()*ass+SocialDemocrat.getPens()*asds+LiberalDemocrat.getPens()*alds+Conservative.getPens()*ats+Reactionary.getPens()*ars+Fascist.getPens()*afs+NationalSocialist.getPens()*ans)/seatsfilled;
+            dpen = Math.round(dpen * 100);
+            dpen = dpen/100;
+            PensionN.setText("   " + dpen);
+            
+            
+            double dhc = (Communist.getHc()*acs+Socialist.getHc()*ass+SocialDemocrat.getHc()*asds+LiberalDemocrat.getHc()*alds+Conservative.getHc()*ats+Reactionary.getHc()*ars+Fascist.getHc()*afs+NationalSocialist.getHc()*ans)/seatsfilled;
+            dhc = Math.round(dhc * 100);
+            dhc = dhc/100;
+            HealthCareN.setText("     " + dhc);
+            
+            
+            double dtax = (Communist.getTax()*acs+Socialist.getTax()*ass+SocialDemocrat.getTax()*asds+LiberalDemocrat.getTax()*alds+Conservative.getTax()*ats+Reactionary.getTax()*ars+Fascist.getTax()*afs+NationalSocialist.getTax()*ans)/seatsfilled;
+            dtax = Math.round(dtax * 100);
+            dtax = dtax/100;
+            TaxN.setText("     " + dtax);
+            
+            
+            double dpub = (Communist.getPubsec()*acs+Socialist.getPubsec()*ass+SocialDemocrat.getPubsec()*asds+LiberalDemocrat.getPubsec()*alds+Conservative.getPubsec()*ats+Reactionary.getPubsec()*ars+Fascist.getPubsec()*afs+NationalSocialist.getPubsec()*ans)/seatsfilled;
+            dpub = Math.round(dpub * 100);
+            dpub = dpub/100;
+            PubN.setText("      " + dpub);
+            pubdis.setText("" + (abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText()))));
         });
         
+        nextturn.setLayoutX(1000);
+        nextturn.setLayoutY(500);
         
         ap.getChildren().addAll(lmyseats, lmypercent, lmyideol);
         
@@ -1179,7 +1252,7 @@ public class Polgame extends Application {
         }
         
         
-        ap.getChildren().addAll(menuBar, ELECTIONS);
+        ap.getChildren().addAll(menuBar, ELECTIONS, nextturn);
         root.getChildren().addAll(ap);
         
         StackPane rootpick = new StackPane();
