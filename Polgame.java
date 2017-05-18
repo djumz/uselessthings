@@ -1160,7 +1160,7 @@ public class Polgame extends Application {
             dpub = Math.round(dpub * 100);
             dpub = dpub/100;
             PubN.setText("      " + dpub);
-            pubdis.setText("" + (abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText()))));
+            pubdis.setText("" + (abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText())))/2);
         });
         
         nextturn.setLayoutX(1000);
