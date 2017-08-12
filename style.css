@@ -1,15 +1,11 @@
-.root{
-    -fx-background-color: #515454;
-}
-Circle{
-    -fx-fill: #7e7e7e;
-}
-.pickyourparty{
-    -fx-alignment: center;
-}
-.hb1{
-    -fx-alignment: center;
-}
-.bcom{
-    -fx-background-color: linear-gradient(#dc9556, #ab4642);
+Field{
+    -fx-background-color: #4CAF50; /* Green */
+    /*-fx-border: none;*/
+    -fx-color: white;
+    -fx-padding: 0px 12px;
+    -fx-width: 20px;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+    -fx-font-size: 16px;
 }
