@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.Math.abs;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,6 +35,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -82,14 +85,25 @@ public class Polgame extends Application {
         pubdis.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 28px;");
         pubdis.setLayoutX(1331);
         pubdis.setLayoutY(62);
-        boolean peopol = true;
-        boolean peoimm = true;
-        boolean peopbd = true;
-        boolean peosuf = true;
-        boolean peowar = true;
+        Label month = new Label("6");
+        Label year = new Label("2017");
+        Label dotone = new Label(".");
+        Label dottwo = new Label(".");
+        month.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 28px;");
+        month.setLayoutX(82);
+        month.setLayoutY(571);
+        year.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 28px;");
+        year.setLayoutX(132);
+        year.setLayoutY(571);
         mypartyname.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18px;");
         mypartyname.setLayoutX(20);
         mypartyname.setLayoutY(50);
+        dotone.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 28px;");
+        dotone.setLayoutX(99);
+        dotone.setLayoutY(571);
+        dottwo.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 28px;");
+        dottwo.setLayoutX(193);
+        dottwo.setLayoutY(571);
         
         
         Circle s1 = new Circle(190, 282, 8);
@@ -521,8 +535,31 @@ public class Polgame extends Application {
         redredova[6] = sedmired;
         redredova[7] = osmired;
         
+        
+        //creates parties
+                party Communist = new party("Communist Party", "Communism", 4, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
+                party Socialist = new party("Socialist Party", "Socialism", 1.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
+                party SocialDemocrat = new party("Social Democrats", "Social Democracy", 17, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
+                party LiberalDemocrat = new party("Liberal Democrats", "Liberalism", 2.5, "#eaf455", 3, 3, 4, 4, 4, true, false, true, true, true);                  //gsld.setFill(Paint.valueOf(LiberalDemocrat.getColour()));
+                party Conservative = new party("Conservative Party", "Conservatism", 17, "#2b20f9", 3, 3, 2, 2, 2, false, false, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
+                party Reactionary = new party("Restoration Party", "Neo-Conservatism", 1.5, "#0E1A8A", 2, 2, 2, 2, 2, false, false, false, false, true);              // gsr.setFill(Paint.valueOf(Reactionary.getColour()));
+                party Fascist = new party("Fascist Party", "Fascism", 4, "#020209", 2, 1, 2, 1, 2, false, false, true, false, true);                      //gsf.setFill(Paint.valueOf(Fascist.getColour()));
+                party NationalSocialist = new party("National Socialist Party", "National Socialism", 9, "#8B4513", 1, 1, 1, 1, 1, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
+
+                party[] partys = new party[8];
+                partys[0] = Communist;
+                partys[1] = Socialist;
+                partys[2] = SocialDemocrat;
+                partys[3] = LiberalDemocrat;
+                partys[4] = Conservative;
+                partys[5] = Reactionary;
+                partys[6] = Fascist;
+                partys[7] = NationalSocialist;
+        
         StackPane root = new StackPane();
         
+        
+        //current government policies, table below seats
         VBox policiesv = new VBox(20);
             HBox policiesh1 = new HBox(20);
                 VBox policiesv1 = new VBox(20);
@@ -560,12 +597,12 @@ public class Polgame extends Application {
                     Button warb = new Button();
                     warb.setText("    Declare War    ");
 
+            //style for table under seats
         poll.setStyle("-fx-background-color: #ff4040;");
         imm.setStyle("-fx-background-color: #ff4040;");
         pubed.setStyle("-fx-background-color: #4CAF50;");
         suffb.setStyle("-fx-background-color: #4CAF50;");
         warb.setStyle("-fx-background-color: #4CAF50;");
-        //suffb.setDisable(true);
         MinimumWageN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
         PensionN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
         HealthCareN.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 20px;");
@@ -579,31 +616,39 @@ public class Polgame extends Application {
         Sufferage.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
         War.setStyle("-fx-text-fill: #FFFFFF; -fx-text-size: 40px;");
         
-        
-        poll.setOnAction(e -> {
-            if(poll.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
-                poll.setStyle("-fx-background-color: #ff4040;");
-            }
-            else{
-                poll.setStyle("-fx-background-color: #4CAF50;");
-            }
-            });
-        imm.setOnAction(e -> {
-            if(imm.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
-                imm.setStyle("-fx-background-color: #ff4040;");
-            }
-            else{
-                imm.setStyle("-fx-background-color: #4CAF50;");
-            }
-            });
-        pubed.setOnAction(e -> {
-            if(pubed.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
-                pubed.setStyle("-fx-background-color: #ff4040;");
-            }
-            else{
-                pubed.setStyle("-fx-background-color: #4CAF50;");
-            }
-            });
+        poll.setOnMouseEntered(e -> {
+            for (Circle[] redredova1 : redredova) {
+                for (Circle item : redredova1) {
+                    for(int i = 0; i<8; i++){
+                                if (item.getFill().equals(Paint.valueOf(partys[i].getColour())) && partys[i].isPollreg()) {
+                                    item.setStroke(Paint.valueOf("#000000"));
+                                    item.setStrokeWidth(1.5);
+                                }
+                            }
+                        }}});
+        poll.setOnMouseExited(e -> {for (Circle[] redredova1 : redredova) {for (Circle item : redredova1) {item.setStrokeWidth(0);}}});
+        imm.setOnMouseEntered(e -> {
+            for (Circle[] redredova1 : redredova) {
+                for (Circle item : redredova1) {
+                    for(int i = 0; i<8; i++){
+                                if (item.getFill().equals(Paint.valueOf(partys[i].getColour())) && partys[i].isImm()) {
+                                    item.setStroke(Paint.valueOf("#000000"));
+                                    item.setStrokeWidth(1.5);
+                                }
+                            }
+                        }}});
+        imm.setOnMouseExited(e -> {for (Circle[] redredova1 : redredova) {for (Circle item : redredova1) {item.setStrokeWidth(0);}}});
+        pubed.setOnMouseEntered(e -> {
+            for (Circle[] redredova1 : redredova) {
+                for (Circle item : redredova1) {
+                    for(int i = 0; i<8; i++){
+                                if (item.getFill().equals(Paint.valueOf(partys[i].getColour())) && partys[i].isPubed()) {
+                                    item.setStroke(Paint.valueOf("#000000"));
+                                    item.setStrokeWidth(1.5);
+                                }
+                            }
+                        }}});
+        pubed.setOnMouseExited(e -> {for (Circle[] redredova1 : redredova) {for (Circle item : redredova1) {item.setStrokeWidth(0);}}});
         suffb.setOnAction(e -> {
             if(suffb.getBackground().toString().equals("javafx.scene.layout.Background@b1eb502a")){
                 suffb.setStyle("-fx-background-color: #ff4040;");
@@ -637,24 +682,7 @@ public class Polgame extends Application {
         policiesv.setLayoutY(350);
         
         
-                party Communist = new party("Communist Party", "Communism", 4, "#4e0a16", 5, 5, 5, 5, 5, true, true, true, false, false);                        //gsc.setFill(Paint.valueOf(Communist.getColour()));
-                party Socialist = new party("Socialist Party", "Socialism", 1.5, "#d10844", 4, 5, 4, 5, 4, true, true, true, true, true);                        //gss.setFill(Paint.valueOf(Socialist.getColour()));
-                party SocialDemocrat = new party("Social Democrats", "Social Democracy", 17, "#ff82cf", 4, 4, 4, 4, 4, true, true, true, true, true);            //gssd.setFill(Paint.valueOf(SocialDemocrat.getColour()));
-                party LiberalDemocrat = new party("Liberal Democrats", "Liberalism", 2.5, "#eaf455", 3, 3, 4, 4, 4, true, true, true, true, true);                  //gsld.setFill(Paint.valueOf(LiberalDemocrat.getColour()));
-                party Conservative = new party("Conservative Party", "Conservatism", 17, "#2b20f9", 3, 3, 2, 2, 2, false, true, false, true, false);             // gst.setFill(Paint.valueOf(Conservative.getColour()));
-                party Reactionary = new party("Restoration Party", "Neo-Conservatism", 1.5, "#0E1A8A", 2, 2, 2, 2, 2, false, false, false, false, true);              // gsr.setFill(Paint.valueOf(Reactionary.getColour()));
-                party Fascist = new party("Fascist Party", "Fascism", 4, "#020209", 2, 1, 2, 1, 2, false, false, true, false, true);                      //gsf.setFill(Paint.valueOf(Fascist.getColour()));
-                party NationalSocialist = new party("National Socialist Party", "National Socialism", 9, "#8B4513", 1, 1, 1, 1, 1, false, false, true, false, true);    // gsn.setFill(Paint.valueOf(NationalSocialist.getColour()));
-
-                party[] partys = new party[8];
-                partys[0] = Communist;
-                partys[1] = Socialist;
-                partys[2] = SocialDemocrat;
-                partys[3] = LiberalDemocrat;
-                partys[4] = Conservative;
-                partys[5] = Reactionary;
-                partys[6] = Fascist;
-                partys[7] = NationalSocialist;
+                
         int[] as = new int[8];
         
         HBox mypoliciesh = new HBox(20);
@@ -909,36 +937,6 @@ public class Polgame extends Application {
                             {proppubed.setStyle("-fx-background-color: #ff4040;"); proppubed.setText("     AGAINST     ");}
                         else {proppubed.setStyle("-fx-background-color: #4CAF50;"); proppubed.setText("         FOR         ");}
                     });
-                /*HBox mypoliciesh9 = new HBox(20);
-                    Button parpoll = new Button();
-                    parpoll.setText("");
-                    parpoll.setOnAction(e -> {
-                        if(partys[Integer.valueOf(myparty.getText())].isPollreg())
-                            {parpoll.setStyle("-fx-background-color: #ff4040;"); parpoll.setText("     AGAINST     "); partys[Integer.valueOf(myparty.getText())].setPollreg(false);}
-                        else {parpoll.setStyle("-fx-background-color: #4CAF50;"); parpoll.setText("         FOR         "); partys[Integer.valueOf(myparty.getText())].setPollreg(true);}
-                    });
-                    Button proppoll = new Button();
-                    proppoll.setText("");
-                    proppoll.setOnAction(e -> {
-                        if(partys[Integer.valueOf(myparty.getText())].isPollreg())
-                            {parpoll.setStyle("-fx-background-color: #ff4040;"); parpoll.setText("     AGAINST     ");}
-                        else {parpoll.setStyle("-fx-background-color: #4CAF50;"); parpoll.setText("         FOR         ");}
-                    });
-                HBox mypoliciesh10 = new HBox(20);
-                    Button parpoll = new Button();
-                    parpoll.setText("");
-                    parpoll.setOnAction(e -> {
-                        if(partys[Integer.valueOf(myparty.getText())].isPollreg())
-                            {parpoll.setStyle("-fx-background-color: #ff4040;"); parpoll.setText("     AGAINST     "); partys[Integer.valueOf(myparty.getText())].setPollreg(false);}
-                        else {parpoll.setStyle("-fx-background-color: #4CAF50;"); parpoll.setText("         FOR         "); partys[Integer.valueOf(myparty.getText())].setPollreg(true);}
-                    });
-                    Button proppoll = new Button();
-                    proppoll.setText("");
-                    proppoll.setOnAction(e -> {
-                        if(partys[Integer.valueOf(myparty.getText())].isPollreg())
-                            {parpoll.setStyle("-fx-background-color: #ff4040;"); parpoll.setText("     AGAINST     ");}
-                        else {parpoll.setStyle("-fx-background-color: #4CAF50;"); parpoll.setText("         FOR         ");}
-                    });*/
         
         mypoliciesh.getChildren().addAll(mypoliciesv1, mypoliciesv2);
             mypoliciesv1.getChildren().addAll(myMinimumWage, myPension, myHealthCare, myTax, myPub, myPoll, myImm, myPubed, mySufferage, myWar);
@@ -956,7 +954,7 @@ public class Polgame extends Application {
         mypoliciesh.setLayoutY(100);
         
         AnchorPane ap = new AnchorPane();
-        ap.getChildren().addAll(policiesv, mypoliciesh, partysopinion, peoplesopinion, publicdiscontent, pubdis);
+        ap.getChildren().addAll(policiesv, mypoliciesh, partysopinion, peoplesopinion, publicdiscontent, pubdis, month, dotone, year, dottwo);
         
         Label[] myopinions = new Label[5];
         myopinions[0] = myminwage;
@@ -982,7 +980,7 @@ public class Polgame extends Application {
 
             for (Circle[] redredova1 : redredova) {
                 for (Circle item : redredova1) {
-                    item.setFill(Paint.valueOf("#7e7e7e"));
+                    item.setFill(Paint.valueOf("#7e7e7e"));     //isprazni sedista
                 }
             }
             
@@ -992,6 +990,8 @@ public class Polgame extends Application {
             for(int o = 0; o < 5; o++){
                 if(Integer.valueOf(myopinions[o].getText()) > 5){myopinions[o].setText(5 + "");}   //temporary fix so policies wont be
                 if(Integer.valueOf(myopinions[o].getText()) < 1){myopinions[o].setText(1 + "");}   //over 5 or under 0
+                if(Integer.valueOf(peoplesopinions[o].getText()) > 5){peoplesopinions[o].setText(5 + "");}   
+                if(Integer.valueOf(peoplesopinions[o].getText()) < 1){peoplesopinions[o].setText(1 + "");}
             }
             
         for(int p = 0; p < 8; p++){
@@ -1050,18 +1050,45 @@ public class Polgame extends Application {
                     modfy[p] = modfy[p] - 0.5*Integer.valueOf(peoplesopinions[o].getText())*Integer.valueOf(peoplesopinions[o].getText()) - 0.5*Integer.valueOf(peoplesopinions[o].getText())+3;
                 }*/
             }
+            if((partys[p].isPollreg() && proppoll.getText().equals("         FOR         ")) || (!partys[p].isPollreg() && proppoll.getText().equals("     AGAINST     "))){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+                    modfy[p] = modfy[p] + 3.33;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+            }
+            if((partys[p].isImm() && propimm.getText().equals("         FOR         ")) || (!partys[p].isImm() && propimm.getText().equals("     AGAINST     "))){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+                    modfy[p] = modfy[p] + 3.33;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+            }
+            if((partys[p].isPubed()&& proppubed.getText().equals("         FOR         ")) || (!partys[p].isPubed()&& proppubed.getText().equals("     AGAINST     "))){
+                    for(int i = 0; i < p; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+                    modfy[p] = modfy[p] + 3.33;
+                    for(int i = p+1; i < 8; i++){
+                        modfy[i] = modfy[i] - 0.4757;
+                    }
+            }
         }
-        
+
         double dminw;
         double dpen;
         double dhc;
         double dtax;
         double dpub;
         
-        modfy[0] = modfy[0] + Double.valueOf(pubdis.getText())*8;
-        modfy[7] = modfy[7] + Double.valueOf(pubdis.getText())*8;
-        modfy[1] = modfy[1] + Double.valueOf(pubdis.getText())*4;
-        modfy[6] = modfy[6] + Double.valueOf(pubdis.getText())*4;
+        modfy[0] = modfy[0] + Double.valueOf(pubdis.getText())*10;
+        modfy[7] = modfy[7] + Double.valueOf(pubdis.getText())*10;
+        modfy[1] = modfy[1] + Double.valueOf(pubdis.getText())*5;
+        modfy[6] = modfy[6] + Double.valueOf(pubdis.getText())*5;
         
   
         for(int p = 0; p < 8; p++){
@@ -1188,6 +1215,30 @@ public class Polgame extends Application {
             
             pubdis.setText("" + round((abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText())))/2));
             
+            int forpoll = 0;
+            int forimm = 0;
+            int forpubed = 0;
+            for (int i = 0; i<8; i++){
+                if(partys[i].isPollreg()){
+                    forpoll = forpoll + as[i];
+                }
+                if(partys[i].isImm()){
+                    forimm = forimm + as[i];
+                }
+                if(partys[i].isPubed()){
+                    forpubed = forpubed + as[i];
+                }
+            }
+            if(forpoll > 133){
+                poll.setStyle("-fx-background-color: #4CAF50;");
+            }else{poll.setStyle("-fx-background-color: #ff4040;");}
+            if(forimm > 133){
+                imm.setStyle("-fx-background-color: #4CAF50;");
+            }else{imm.setStyle("-fx-background-color: #ff4040;");}
+            if(forpubed > 133){
+                pubed.setStyle("-fx-background-color: #4CAF50;");
+            }else{pubed.setStyle("-fx-background-color: #ff4040;");}
+            
         });
         Button nextturn = new Button();
         nextturn.setText("NEXT TURN ----->");
@@ -1196,7 +1247,7 @@ public class Polgame extends Application {
                 peoplesopinions[i].setText(fix(Double.valueOf(peoplesopinions[i].getText())+0.1) + "");
             }*/
             
-                int acs = 0;    as[0] = acs;
+                /*int acs = 0;    as[0] = acs;
                 int ass = 0;    as[1] = ass;
                 int asds = 0;   as[2] = asds;
                 int alds = 0;   as[3] = alds;
@@ -1223,6 +1274,7 @@ public class Polgame extends Application {
                 ars = as[5];
                 afs = as[6];
                 ans = as[7];
+                
             double dminw = (Communist.getMinwage()*acs+Socialist.getMinwage()*ass+SocialDemocrat.getMinwage()*asds+LiberalDemocrat.getMinwage()*alds+Conservative.getMinwage()*ats+Reactionary.getMinwage()*ars+Fascist.getMinwage()*afs+NationalSocialist.getMinwage()*ans)/seatsfilled;
             dminw = Math.round(dminw * 100);
             dminw = dminw/100;
@@ -1250,6 +1302,26 @@ public class Polgame extends Application {
             dpub = dpub/100;
             PubN.setText("      " + dpub);
             pubdis.setText("" + round((abs(dminw-Integer.valueOf(peoplesopinions[0].getText())) + abs(dpen-Integer.valueOf(peoplesopinions[1].getText())) + abs(dhc-Integer.valueOf(peoplesopinions[2].getText())) + abs(dtax-Integer.valueOf(peoplesopinions[3].getText())) + abs(dpub-Integer.valueOf(peoplesopinions[4].getText())))/2));
+            */
+            
+            pubdis.setText(round(Double.valueOf(pubdis.getText()) - 0.1) + "");
+            
+            if (Integer.valueOf(month.getText()) <= 11){
+                month.setText((Integer.valueOf(month.getText())+1) + "");
+            }
+            else
+            {
+                month.setText(1 + "");
+                year.setText((Integer.valueOf(year.getText())+1) + "");
+            }
+            
+            if (Integer.valueOf(month.getText()) <= 9){
+                dotone.setLayoutX(99);
+            }
+            else
+            {
+                dotone.setLayoutX(115);
+            }
         });
         
         nextturn.setLayoutX(1000);
@@ -1353,8 +1425,8 @@ public class Polgame extends Application {
         
         Scene gamescene = new Scene(root, 1392, 675);
         Scene pickpartyscene = new Scene(rootpick, 1470, 700);
-        gamescene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());      
-        pickpartyscene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        gamescene.getStylesheets().add(getClass().getResource("polstyle.css").toExternalForm());      
+        pickpartyscene.getStylesheets().add(getClass().getResource("polstyle.css").toExternalForm());
         
                 
         primaryStage.setTitle("PolGame");
@@ -1383,6 +1455,11 @@ public class Polgame extends Application {
             myparty.setText("0");
             tfpartyname.setText("Communist Party");
             tfpartyideol.setText("" + partys[Integer.valueOf(myparty.getText())].getIdeology());
+            Media media = new Media("file:///C:/Users/komp/Documents/NetBeansProjects/polgame/src/polgame/Music/opo/com/1.mp3");
+            MediaPlayer player = new MediaPlayer(media); 
+            player.play();
+            player.setAutoPlay(true);
+            player.setVolume(0.9);
         });
         Button bsoc = new Button();
         bsoc.setText("    Socialist    ");
