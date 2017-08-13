@@ -5,9 +5,11 @@
  */
 package ites;
 
+import static java.lang.Math.sqrt;
 import java.util.Random;
 import javafx.geometry.Insets;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -25,12 +27,61 @@ import javafx.stage.Stage;
  * @author komp
  */
 public class ITES extends Application {
-    /*public double round(int x1, int y1, int x2, int y2){
-        double transportcost = 0;
-        for(int i = 0; x1!=x2 && y1!=y2; i++){
+    public int fix(int x){
+        if(x<0){
+            x=0;
         }
-        return transportcost;
-    }*/
+        if(x>32){
+            x=32;
+        }
+        return x;
+    }
+    
+    public void findpath(int x1, int y1, int x2, int y2, Field[][] infra){
+        for(int i=0; i<32; i++){
+            for(int j=0; j<32; j++){
+                infra[i][j].setInfra(Math.sqrt(((i-x1)*(i-x1))+((j-y1)*(j-y1)))+Math.sqrt(((i-x2)*(i-x2))+((j-y2)*(j-y2))));
+                if (infra[i][j].getType() == "Mountain"){
+                    infra[i][j].setInfra(infra[i][j].getInfra()+50);
+                }
+            }
+        }
+    }
+    
+    public void pathcolorer(int x1, int y1, int x2, int y2, Field[][] infra){
+        //Field[] ourroad = new Field[100];
+//        for(int i=0; i<32; i++){
+//            for(int j=0; j<32; j++){
+//                infra[i][j].setInfra(/*Math.sqrt(((i-x1)*(i-x1))+((j-y1)*(j-y1)))+*/Math.sqrt(((i-x2)*(i-x2))+((j-y2)*(j-y2))));
+//                if (infra[i][j].getType() == "Mountain"){
+//                    infra[i][j].setInfra(infra[i][j].getInfra()+50);
+//                }
+//            }
+//        }
+        int byx = x1;
+        int byy = y1;
+        while(x1!=x2 && y1!=y2){
+            x1 = byx;
+            y1 = byy;
+            double nextfield = 99;
+            for(int g=-1; g<2; g++){
+                for(int h=-1; h<2; h++){
+                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield){//if this is lowest loss
+                        //This is the lowest loss
+                        nextfield = infra[fix(x1+g)][fix(y1+h)].getInfra();
+                        //dont go back
+                        infra[fix(x1+g)][fix(y1+h)].setInfra(infra[fix(x1+g)][fix(y1+h)].getInfra()+50);
+                        //remember where you were
+                        byx = x1+g;
+                        byy = y1+h;
+                    }
+                }
+            }
+            //ourroad[a] = infra[nextx][nexty];
+            infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #b2b4b5;");
+            
+        }
+    }
     
     @Override
     public void start(Stage primaryStage) {
@@ -51,7 +102,7 @@ public class ITES extends Application {
         Field[][] buttons = new Field[32][32];
         for(int i=0; i<32; i++){
             for(int j=0; j<32; j++){
-                buttons[i][j] = new Field("", "Farmland", i, j, "#4CAF50");
+                buttons[i][j] = new Field("", "Farmland", i, j, 0.0,"#4CAF50");
                 GridPane.setConstraints(buttons[i][j], i, j);
                 map.getChildren().addAll(buttons[i][j]);
             }
@@ -59,14 +110,7 @@ public class ITES extends Application {
         
         Random randx = new Random();
         Random randy = new Random();
-        //cities
-        for(int i=0; i<3; i++){
-            int cx = randx.nextInt(32);
-            int cy = randy.nextInt(32);
-            buttons[cx][cy].setStyle("-fx-background-color: #b2b200;");
-            buttons[cx][cy].setType("City");
-            buttons[cx][cy].setColour("#b2b200");
-        }
+        
         //mountains
         for(int i=0; i<4; i++){
             int mx = randx.nextInt(28)+2;
@@ -81,10 +125,42 @@ public class ITES extends Application {
             buttons[mx+1][my].setColour("#715d3e");
             buttons[mx][my-1].setColour("#715d3e");
             buttons[mx-1][my].setColour("#715d3e");
+            buttons[mx][my].setType("Mountain");
+            buttons[mx][my+1].setType("Mountain");
+            buttons[mx+1][my].setType("Mountain");
+            buttons[mx][my-1].setType("Mountain");
+            buttons[mx-1][my].setType("Mountain");
         }
+        //cities
+        for(int i=0; i<1; i++){
+            int c1x = randx.nextInt(30)+1;
+            int c1y = randy.nextInt(30)+1;
+            buttons[c1x][c1y].setStyle("-fx-background-color: #b2b200;");
+            buttons[c1x][c1y].setType("City");
+            buttons[c1x][c1y].setColour("#b2b200");
+            int c2x = randx.nextInt(30)+1;
+            int c2y = randy.nextInt(30)+1;
+            buttons[c2x][c2y].setStyle("-fx-background-color: #b2b200;");
+            buttons[c2x][c2y].setType("City");
+            buttons[c2x][c2y].setColour("#b2b200");
+            findpath(c1x,c1y,c2x,c2y, buttons);
+            pathcolorer(c1x,c1y,c2x,c2y, buttons);
+            buttons[fix(c1x)][fix(c1y)].setStyle("-fx-background-color: #b2b200;");//no need for fix()
+            buttons[fix(c2x)][fix(c2y)].setStyle("-fx-background-color: #b2b200;");
+            for (Field[] buttons1 : buttons) {
+            for (Field item : buttons1) {
+                item.setOnAction(e -> {
+                    //item.setInfra(0);
+                });
+            }
+        }
+            
+        }
+        //pathcolorer(3,5,6,18, buttons);
         for (Field[] buttons1 : buttons) {
             for (Field item : buttons1) {
                 item.setOnAction(e -> {
+                    //pathcolorer(2,2,5,5, buttons);
                     buttons[Integer.valueOf(onx.getText())][Integer.valueOf(ony.getText())].setStyle("-fx-background-color: "+ oncolor.getText() +";");
                     item.setStyle("-fx-background-color: #4286f4;");
                     type.setText(item.getType());
@@ -92,7 +168,8 @@ public class ITES extends Application {
                     onx.setText(""+item.getX());
                     ony.setText(""+item.getY());
                     oncolor.setText(""+item.getColour());
-                    type.setText(oncolor.getText());
+                    type.setText("" + item.getInfra());
+                    
                 });
             }
         }
