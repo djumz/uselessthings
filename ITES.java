@@ -22,10 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author komp
- */
+
 public class ITES extends Application {
     public int fix(int x){
         if(x<0){
@@ -66,7 +63,7 @@ public class ITES extends Application {
             double nextfield = 99;
             for(int g=-1; g<2; g++){
                 for(int h=-1; h<2; h++){
-                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield){//if this is lowest loss
+                    if(!"City".equals(infra[fix(x1+g)][fix(y1+h)].getType()) && infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield){//if this is lowest loss
                         //This is the lowest loss
                         nextfield = infra[fix(x1+g)][fix(y1+h)].getInfra();
                         //dont go back
@@ -79,7 +76,8 @@ public class ITES extends Application {
             }
             //ourroad[a] = infra[nextx][nexty];
             infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #b2b4b5;");
-            
+            infra[fix(x1)][fix(y1)].setColour("#b2b4b5");
+            infra[fix(x1)][fix(y1)].setType("Road");
         }
     }
     
