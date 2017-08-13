@@ -63,7 +63,7 @@ public class ITES extends Application {
             double nextfield = 99;
             for(int g=-1; g<2; g++){
                 for(int h=-1; h<2; h++){
-                    if(!"City".equals(infra[fix(x1+g)][fix(y1+h)].getType()) && infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield){//if this is lowest loss
+                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield && infra[fix(x1+g)][fix(y1+h)].getType()!="City"){//if this is lowest loss
                         //This is the lowest loss
                         nextfield = infra[fix(x1+g)][fix(y1+h)].getInfra();
                         //dont go back
