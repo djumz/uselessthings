@@ -55,27 +55,26 @@ public class ITES extends Application {
 //                }
 //            }
 //        }
-        int byx = x1;
-        int byy = y1;
-        while(!(x1==x2 && y1==y2)){
-            x1 = byx;
-            y1 = byy;
-            double nextfield = 99;
+        while(!(x1==x2 && y1==y2)){ 
+            int byx = x1; //before start im
+            int byy = y1; //on this x & y
+            double binfra = 999999;
             for(int g=-1; g<2; g++){
                 for(int h=-1; h<2; h++){
-                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield/* && infra[fix(x1+g)][fix(y1+h)].getType()!="City"*/){//if this is lowest loss
-                        //This is the lowest loss
-                        nextfield = infra[fix(x1+g)][fix(y1+h)].getInfra();
-                        
-                        //remember where you were
-                        byx = x1+g;
-                        byy = y1+h;
+                    if(infra[fix(x1+g)][fix(y1+h)].getInfra()<=binfra && !(g==0 && h==0)){//if this is lowest loss
+                        //best yet way
+                        binfra = infra[fix(x1+g)][fix(y1+h)].getInfra();
+                        //best yet place
+                        byx = fix(x1+g);
+                        byy = fix(y1+h);
                     }
                 }
             }
+            x1 = byx;   
+            y1 = byy;  
             //ourroad[a] = infra[nextx][nexty];
             //dont go back
-            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getInfra()+100);
+            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getInfra()+1000);
             infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #b2b4b5;");
             infra[fix(x1)][fix(y1)].setColour("#b2b4b5");
             infra[fix(x1)][fix(y1)].setType("Road");
