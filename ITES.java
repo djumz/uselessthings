@@ -57,17 +57,16 @@ public class ITES extends Application {
 //        }
         int byx = x1;
         int byy = y1;
-        while(x1!=x2 && y1!=y2){
+        while(!(x1==x2 && y1==y2)){
             x1 = byx;
             y1 = byy;
             double nextfield = 99;
             for(int g=-1; g<2; g++){
                 for(int h=-1; h<2; h++){
-                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield && infra[fix(x1+g)][fix(y1+h)].getType()!="City"){//if this is lowest loss
+                    if(infra[fix(x1+g)][fix(y1+h)].getInfra() <= nextfield/* && infra[fix(x1+g)][fix(y1+h)].getType()!="City"*/){//if this is lowest loss
                         //This is the lowest loss
                         nextfield = infra[fix(x1+g)][fix(y1+h)].getInfra();
-                        //dont go back
-                        infra[fix(x1+g)][fix(y1+h)].setInfra(infra[fix(x1+g)][fix(y1+h)].getInfra()+50);
+                        
                         //remember where you were
                         byx = x1+g;
                         byy = y1+h;
@@ -75,6 +74,8 @@ public class ITES extends Application {
                 }
             }
             //ourroad[a] = infra[nextx][nexty];
+            //dont go back
+            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getInfra()+100);
             infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #b2b4b5;");
             infra[fix(x1)][fix(y1)].setColour("#b2b4b5");
             infra[fix(x1)][fix(y1)].setType("Road");
@@ -135,16 +136,17 @@ public class ITES extends Application {
             int c1y = randy.nextInt(30)+1;
             buttons[c1x][c1y].setStyle("-fx-background-color: #b2b200;");
             buttons[c1x][c1y].setType("City");
-            buttons[c1x][c1y].setColour("#b2b200");
+            
             int c2x = randx.nextInt(30)+1;
             int c2y = randy.nextInt(30)+1;
             buttons[c2x][c2y].setStyle("-fx-background-color: #b2b200;");
             buttons[c2x][c2y].setType("City");
-            buttons[c2x][c2y].setColour("#b2b200");
             findpath(c1x,c1y,c2x,c2y, buttons);
             pathcolorer(c1x,c1y,c2x,c2y, buttons);
             buttons[fix(c1x)][fix(c1y)].setStyle("-fx-background-color: #b2b200;");//no need for fix()
             buttons[fix(c2x)][fix(c2y)].setStyle("-fx-background-color: #b2b200;");
+            buttons[c1x][c1y].setColour("#b2b200");
+            buttons[c2x][c2y].setColour("#b2b200");
             for (Field[] buttons1 : buttons) {
             for (Field item : buttons1) {
                 item.setOnAction(e -> {
