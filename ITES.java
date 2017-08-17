@@ -38,24 +38,23 @@ public class ITES extends Application {
         for(int i=0; i<32; i++){
             for(int j=0; j<32; j++){
                 infra[i][j].setInfra(Math.sqrt(((i-x1)*(i-x1))+((j-y1)*(j-y1)))+Math.sqrt(((i-x2)*(i-x2))+((j-y2)*(j-y2))));
+                infra[i][j].setGcost(Math.sqrt(((i-x1)*(i-x1))+((j-y1)*(j-y1))));
+                infra[i][j].setHcost(Math.sqrt(((i-x2)*(i-x2))+((j-y2)*(j-y2))));
                 if (infra[i][j].getType() == "Mountain"){
                     infra[i][j].setInfra(infra[i][j].getInfra()+50);
+                    infra[i][j].setGcost(infra[i][j].getGcost()+50);
+                    infra[i][j].setHcost(infra[i][j].getHcost()+50);
                 }
             }
         }
     }
     
     public void pathcolorer(int x1, int y1, int x2, int y2, Field[][] infra){
-        //Field[] ourroad = new Field[100];
-//        for(int i=0; i<32; i++){
-//            for(int j=0; j<32; j++){
-//                infra[i][j].setInfra(/*Math.sqrt(((i-x1)*(i-x1))+((j-y1)*(j-y1)))+*/Math.sqrt(((i-x2)*(i-x2))+((j-y2)*(j-y2))));
-//                if (infra[i][j].getType() == "Mountain"){
-//                    infra[i][j].setInfra(infra[i][j].getInfra()+50);
-//                }
-//            }
-//        }
+        int ogx1 = x1;
+        int ogy1 = y1;
+        //goes there
         while(!(x1==x2 && y1==y2)){ 
+            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getInfra()+20);
             int byx = x1; //before start im
             int byy = y1; //on this x & y
             double binfra = 999999;
@@ -74,10 +73,54 @@ public class ITES extends Application {
             y1 = byy;  
             //ourroad[a] = infra[nextx][nexty];
             //dont go back
-            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getInfra()+1000);
-            infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #b2b4b5;");
-            infra[fix(x1)][fix(y1)].setColour("#b2b4b5");
+            infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #436456;");
+            infra[fix(x1)][fix(y1)].setColour("#436456");
             infra[fix(x1)][fix(y1)].setType("Road");
+        }
+        
+        x1 = ogx1;
+        y1 = ogy1;
+        
+        
+        //goes back
+        while(!(x1==x2 && y1==y2)){ 
+            infra[fix(x1)][fix(y1)].setInfra(infra[fix(x1)][fix(y1)].getHcost()+20);
+            int byx = x1; //before start im
+            int byy = y1; //on this x & y
+            double binfra = 999999;
+            for(int g=-1; g<2; g++){
+                for(int h=-1; h<2; h++){
+                    if(infra[fix(x1+g)][fix(y1+h)].getHcost()<=binfra && !(g==0 && h==0) && infra[fix(x1+g)][fix(y1+h)].getColour()=="#436456"){//if this is lowest loss
+                        //best yet way
+                        binfra = infra[fix(x1+g)][fix(y1+h)].getHcost();
+                        //best yet place
+                        byx = fix(x1+g);
+                        byy = fix(y1+h);
+                    }
+                }
+            }
+            x1 = byx;   
+            y1 = byy;  
+            //dont go back
+            infra[fix(x1)][fix(y1)].setStyle("-fx-background-color: #817253;");
+            infra[fix(x1)][fix(y1)].setColour("#817253");
+            infra[fix(x1)][fix(y1)].setType("Road");
+        }
+        
+        
+        //fixes road remains
+        for(int i=0; i<32; i++){
+            for(int j=0; j<32; j++){
+                if(infra[fix(i)][fix(j)].getColour()=="#436456"){
+                    infra[fix(i)][fix(j)].setColour("#4CAF50");
+                    infra[fix(i)][fix(j)].setStyle("-fx-background-color: #4CAF50;");
+                    infra[fix(i)][fix(j)].setType("Farmland");
+                }
+                if(infra[fix(i)][fix(j)].getColour()=="#817253"){
+                    infra[fix(i)][fix(j)].setColour("#b2b4b5");
+                    infra[fix(i)][fix(j)].setStyle("-fx-background-color: #b2b4b5;");
+                }
+            }
         }
     }
     
@@ -100,7 +143,7 @@ public class ITES extends Application {
         Field[][] buttons = new Field[32][32];
         for(int i=0; i<32; i++){
             for(int j=0; j<32; j++){
-                buttons[i][j] = new Field("", "Farmland", i, j, 0.0,"#4CAF50");
+                buttons[i][j] = new Field("", "Farmland", i, j, 0.0, 0.0, 0, 0,"#4CAF50");
                 GridPane.setConstraints(buttons[i][j], i, j);
                 map.getChildren().addAll(buttons[i][j]);
             }
@@ -130,7 +173,7 @@ public class ITES extends Application {
             buttons[mx-1][my].setType("Mountain");
         }
         //cities
-        for(int i=0; i<1; i++){
+        for(int i=0; i<2; i++){
             int c1x = randx.nextInt(30)+1;
             int c1y = randy.nextInt(30)+1;
             buttons[c1x][c1y].setStyle("-fx-background-color: #b2b200;");

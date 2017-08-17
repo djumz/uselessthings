@@ -16,13 +16,21 @@ public class Field extends Button{
     public String type;
     public int x;
     public int y;
+    public double gcost;
+    public double hcost;
+    public int step;
     public String colour;
+    private double infra;
 
-    public Field(String name, String type, int x, int y, String colour) {
+    public Field(String name, String type, int x, int y, double gcost, double hcost, double infra, int step, String colour) {
         this.name = name;
         this.type = type;
         this.x = x;
         this.y = y;
+        this.gcost = gcost;
+        this.hcost = hcost;
+        this.infra = infra;
+        this.step = step;
         this.colour = colour;
     }
 
@@ -30,6 +38,18 @@ public class Field extends Button{
         return name;
     }
 
+    public double getGcost() {
+        return gcost;
+    }
+
+    public double getHcost() {
+        return hcost;
+    }
+
+    public double getInfra() {
+        return infra;
+    }
+    
     public String getType() {
         return type;
     }
@@ -40,6 +60,10 @@ public class Field extends Button{
 
     public int getY() {
         return y;
+    }
+
+    public int getStep() {
+        return step;
     }
 
     public String getColour() {
@@ -60,6 +84,22 @@ public class Field extends Button{
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setGcost(double gcost) {
+        this.gcost = gcost;
+    }
+
+    public void setHcost(double hcost) {
+        this.hcost = hcost;
+    }
+
+    public void setInfra(double infra) {
+        this.infra = infra;
+    }
+    
+    public void setStep(int step) {
+        this.step = step;
     }
 
     public void setColour(String colour) {
