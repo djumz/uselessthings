@@ -45,8 +45,8 @@ public class Ass extends Application {
         
         //get image with dots and make empty writable image of same size
         //Image srcIm = new Image(new File("C:\\Users\\komp\\Documents\\NetBeansProjects\\teslic\\src\\teslic\\test.jpg").toURI().toURL().toExternalForm());
-        int width = 751;
-        int height = 251;
+        int width = 1251;
+        int height = 851;
         //PixelReader readerASS = srcIm.getPixelReader();
         WritableImage dest = new WritableImage(width, height);
         PixelReader reader = dest.getPixelReader();
@@ -54,7 +54,7 @@ public class Ass extends Application {
         
         //
         for (int y = 0; y < 20; y++) {
-                writer.setColor((int) Math.floor(Math.random() * 750),(int) Math.floor(Math.random() * 250), black);
+                writer.setColor((int) Math.floor(Math.random() * width),(int) Math.floor(Math.random() * height), black);
             }
         
         //count dots
@@ -85,7 +85,7 @@ public class Ass extends Application {
         
         //naci najblizu tacku za sve
         double[] udaljenostodtacke = new double[dots];
-        double najblizatacka = 100000000;
+        double najblizatacka;
         int[] dotkojijenajblizi = new int[width*height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -96,9 +96,9 @@ outerloop :     for (int a = 0; a < 1; a++){
                         if (udaljenostodtacke[i] == 0){break outerloop;}
                     }
                     for (int j = 0; j < dots; j++) {
-                        if (udaljenostodtacke[j] == najblizatacka){
-                            writer.setColor(x, y, black);
-                        }
+//                        if (udaljenostodtacke[j] == najblizatacka){
+//                            writer.setColor(x, y, black);
+//                        }
                         if (udaljenostodtacke[j] < najblizatacka){
                             najblizatacka = udaljenostodtacke[j];
                             dotkojijenajblizi[y*width+x] = j;
@@ -121,23 +121,29 @@ outerloop :     for (int a = 0; a < 1; a++){
                 writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
             }
         }   
+        for (int x = 0; x < width; x++) {
+            for (int y = height-1; y > 0; y--) {
+                if (reader.getColor(x, y).equals(black)){break;}
+                writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
+            }
+        }
         
         
         
-        //debug
-        //for (int x = 0; x < width; x++) {
-            //for (int y = 0; y < height; y++) {
-                for (int i = 0; i < dots; i++) {
-                    //System.out.println(udaljenostodtacke[i]);
-                    System.out.print(xs[i]+ "    ");
-                    System.out.println(ys[i]);
-                }   
-                for (int i = 0; i < width*height; i++) {
-                System.out.println(dotkojijenajblizi[i]);
-                }
-            //}
-        //}  
-        System.out.println(dots);
+//        //debug
+//        //for (int x = 0; x < width; x++) {
+//            //for (int y = 0; y < height; y++) {
+//                for (int i = 0; i < dots; i++) {
+//                    //System.out.println(udaljenostodtacke[i]);
+//                    System.out.print(xs[i]+ "    ");
+//                    System.out.println(ys[i]);
+//                }   
+//                for (int i = 0; i < width*height; i++) {
+//                System.out.println(dotkojijenajblizi[i]);
+//                }
+//            //}
+//        //}  
+//        System.out.println(dots);
         
         ImageView iv = new ImageView();
         iv.setImage(dest);
@@ -145,7 +151,7 @@ outerloop :     for (int a = 0; a < 1; a++){
         
         root.getChildren().addAll(iv);
         
-        Scene scene = new Scene(root, 1300, 750);
+        Scene scene = new Scene(root, width+1, height+1);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
