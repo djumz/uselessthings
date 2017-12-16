@@ -89,6 +89,7 @@ public class Ass extends Application {
         int[] dotkojijenajblizi = new int[width*height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                najblizatacka = 10000000;
 outerloop :     for (int a = 0; a < 1; a++){
                     for (int i = 0; i < dots; i++) {
                         udaljenostodtacke[i] = Math.sqrt(Math.pow(x-xs[i], 2) + Math.pow(y-ys[i], 2));
