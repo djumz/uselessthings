@@ -75,10 +75,11 @@ public class Teslic extends Application {
         
         //naci najblizu tacku za sve
         double[] udaljenostodtacke = new double[dots];
-        double najblizatacka = 100000000;
+        double najblizatacka;
         int[] dotkojijenajblizi = new int[width*height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                najblizatacka = 10000000;
 outerloop :     for (int a = 0; a < 1; a++){
                     for (int i = 0; i < dots; i++) {
                         udaljenostodtacke[i] = Math.sqrt(Math.pow(x-xs[i], 2) + Math.pow(y-ys[i], 2));
@@ -107,30 +108,22 @@ outerloop :     for (int a = 0; a < 1; a++){
                 writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
             }
         }   
-        
-        
-        
-        //debug
-        //for (int x = 0; x < width; x++) {
-            //for (int y = 0; y < height; y++) {
-                for (int i = 0; i < dots; i++) {
-                    //System.out.println(udaljenostodtacke[i]);
-                    System.out.print(xs[i]+ "    ");
-                    System.out.println(ys[i]);
-                }   
-            //}
-        //}  
-        System.out.println(dots);
+        for (int x = 0; x < width; x++) {
+            for (int y = height-1; y > 0; y--) {
+                if (reader.getColor(x, y).equals(black)){break;}
+                writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
+            }
+        }
         
         ImageView iv = new ImageView();
-        iv.setImage(srcIm);
+        iv.setImage(dest);
         AnchorPane root = new AnchorPane();
         
         root.getChildren().addAll(iv);
         
-        Scene scene = new Scene(root, 1300, 750);
+        Scene scene = new Scene(root, width+1, height+1);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("assassassassassassassassassassassassassass");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
