@@ -35,6 +35,22 @@ public class Ass extends Application {
         return p;
     }
     
+    public int oob(int p, int min, int max){
+        if(p<min){p=min;}
+        if(p>max){p=max;}
+        return p;
+    }
+    
+    public void bold(int[] xs, int[] ys, int width, int height, int dots, PixelWriter writer, Color black){
+        for (int i = 0; i < dots; i++) {
+            for (int y = -1; y < 2; y++) {
+                for (int x = -1; x < 2; x++) {
+                    writer.setColor(oob(xs[i]+x, 0, width-1), oob(ys[i]+y, 0, height-1), black);
+                }
+            }
+        }
+    }
+    
     @Override
     public void start(Stage primaryStage) throws MalformedURLException {
         
@@ -52,7 +68,7 @@ public class Ass extends Application {
         PixelReader reader = dest.getPixelReader();
         PixelWriter writer = dest.getPixelWriter();
         
-        //
+        //color 20 rand dots
         for (int y = 0; y < 20; y++) {
                 writer.setColor((int) Math.floor(Math.random() * width),(int) Math.floor(Math.random() * height), black);
             }
@@ -96,8 +112,8 @@ outerloop :     for (int a = 0; a < 1; a++){
                         if (udaljenostodtacke[i] == 0){break outerloop;}
                     }
                     for (int j = 0; j < dots; j++) {
-//                        if (udaljenostodtacke[j] == najblizatacka){
-//                            writer.setColor(x, y, black);
+//                        if (Math.abs(udaljenostodtacke[j] - najblizatacka) < 0.2){
+//                            writer.setColor(x, y, black);                             ovo ne radi
 //                        }
                         if (udaljenostodtacke[j] < najblizatacka){
                             najblizatacka = udaljenostodtacke[j];
@@ -127,24 +143,65 @@ outerloop :     for (int a = 0; a < 1; a++){
                 writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
             }
         }
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (reader.getColor(x, y).equals(black)){break;}
+                writer.setColor(x, y, randboje[dotkojijenajblizi[y*width+x]]);
+            }
+        }
         
+        //enlargen cities
+        bold(xs, ys, width, height, dots, writer, black);
         
+        //color borders
+        Color ovaboja;
+        Color onaboja;
+        Color granica;
+        granica = rc.getColor(1, 0);
+        for (int i = 0; i < width; i++) {
+            ass:for (int j = 0; j < height; j++) {
+                ovaboja = reader.getColor(i, j);
+                for (int x = -1; x < 2; x++) {
+                    for (int y = -1; y < 2; y++) {
+                        onaboja = reader.getColor(oob(i+x, 0, width-1), oob(j+y, 0, height-1));
+                        if(!ovaboja.equals(onaboja) && !onaboja.equals(granica) && !ovaboja.equals(granica) && !ovaboja.equals(black) && !onaboja.equals(black)){
+                            writer.setColor(i, j, granica);
+                            //break ass;
+                            //onaboja = Color.color(Math.random(), Math.random(), Math.random());
+                        }
+                    }
+                }
+            }
+        }
         
-//        //debug
-//        //for (int x = 0; x < width; x++) {
-//            //for (int y = 0; y < height; y++) {
-//                for (int i = 0; i < dots; i++) {
-//                    //System.out.println(udaljenostodtacke[i]);
-//                    System.out.print(xs[i]+ "    ");
-//                    System.out.println(ys[i]);
-//                }   
-//                for (int i = 0; i < width*height; i++) {
-//                System.out.println(dotkojijenajblizi[i]);
-//                }
-//            //}
-//        //}  
-//        System.out.println(dots);
+        //remember cities
+        int brs = 0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                if (color.equals(granica)){
+                    brs++;
+                }
+            }
+        }
+        int[] xb = new int[brs];
+        int[] yb = new int[brs];
+        int bordersfound = 0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                if (color.equals(granica)){
+                    xb[bordersfound] = x;
+                    yb[bordersfound] = y;
+                    bordersfound++;
+                }
+            }
+        }
         
+        //enlargen borders
+        bold(xb, yb, width, height, brs, writer, granica);
+        
+        //scene
         ImageView iv = new ImageView();
         iv.setImage(dest);
         AnchorPane root = new AnchorPane();
@@ -153,7 +210,7 @@ outerloop :     for (int a = 0; a < 1; a++){
         
         Scene scene = new Scene(root, width+1, height+1);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("assassassassassassassassassassassassassass");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
